@@ -1,0 +1,18 @@
+[data-wikilookup] {
+	border-bottom: 1px dashed #666;
+}
+
+/* Popup */
+.wl-pageInfoWidget-box:first-child {
+	padding: 1em;
+}
+
+.wl-pageInfoWidget-content-pending,
+.wl-pageInfoWidget-content-error {
+	padding: 1em;
+}
+
+.wl-pageInfoWidget-view-title {
+	font-size: 1.2em;
+	padding-bottom: 0.5em;
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Wordpress-Wikilookup",
+	"license": "GPL-3.0-or-later",
+	"author": "Moriel Schottlender",
+	"version": "0.0.1",
+	"scripts": {
+		"test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/"
+	},
+	"autoload": {
+		"psr-4": {
+			"Wikilookup\\": "includes/"
+		}
+	},
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}
