@@ -1,8 +1,22 @@
 {
 	"name": "Wordpress-Wikilookup",
+	"description": "A WordPress implementation of wikilookup: add popups from Wikipedia to your site.",
 	"license": "GPL-3.0-or-later",
-	"author": "Moriel Schottlender",
 	"version": "0.0.1",
+	"authors": [
+		{
+			"name": "Moriel Schottlender",
+			"email": "mooeypoo@gmail.com",
+			"homepage": "http://moriel.smarterthanthat.com",
+			"role": "Developer"
+		}
+	],
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/mooeypoo/wikilookup-wordpress.git"
+		}
+	],
 	"scripts": {
 		"test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/"
 	},
