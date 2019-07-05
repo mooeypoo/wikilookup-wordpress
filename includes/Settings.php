@@ -79,6 +79,20 @@ class Settings {
 		);
 	}
 
+	protected function outputNoticeBox( $type, $message ) {
+		if ( $type === 'error' ) {
+			$class = 'notice notice-error';
+		} else {
+			$class = 'notice notice-success';
+		}
+
+		return printf(
+			'<div class="%1$s"><p>%2$s</p></div>',
+			esc_attr( $class ),
+			esc_html( $message )
+		);
+	}
+
 	protected function getSettingValue( $param, $default = '' ) {
 		$set = Utils::getPropValue( $this->settings, $param, null );
 		if ( $set ) {

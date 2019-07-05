@@ -12,6 +12,15 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 
 <div class="wrap wl-settings">
 	<h2><?php _e( 'Wikilookup Popup Settings' ) ?></h2>
+<?php
+	if ( $_GET[ 'wl_notice' ] === 'success' ) {
+		$this->outputNoticeBox( 'success', __( 'Settings saved successfully', 'wikilookup' ) );
+	} else if ( $_GET[ 'wl_notice' ] === 'fail' ) {
+		$this->outputNoticeBox( 'error', __( 'There was a problem saving settings.', 'wikilookup' ) );
+	}
+?>
+
+
 	<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" id="wikilookup_settings_form" >
 		<input type="hidden" name="action" value="wikilookup_settings_form_response">
 		<input type="hidden" name="wikilookup_settings_form_nonce" value="<?php echo $wikilookup_nonce ?>" />
