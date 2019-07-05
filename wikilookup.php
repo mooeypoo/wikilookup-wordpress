@@ -8,9 +8,15 @@
 */
 include 'vendor/autoload.php';
 
-define( 'WIKILOOKUP_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+define( 'WIKILOOKUP_DIR_URL', plugin_dir_url( __FILE__ ) );
+define( 'WIKILOOKUP_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
-$loader = new Wikilookup\Loader();
+if ( is_admin() ) {
+	// Register Script
+	add_action( 'admin_enqueue_scripts', 'Wikilookup\Loader::loadSettingsPageAssets' );
+	$wikilookup_settings = new Wikilookup\Settings();
+}
+
 
 // Add Shortcode
 function wikilookup_shortcode( $atts , $content = null ) {
@@ -26,13 +32,11 @@ function wikilookup_shortcode( $atts , $content = null ) {
 	);
 }
 
-function wikilookup_scripts() {
-	$loader->loadAssets();
-}
+// add_filter( 'plugin_action_links', [ 'Wikilookup\Loader', 'addSettingsLink' ], 10, 5 );
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), [ 'Wikilookup\Loader', 'addSettingsLink' ], 10, 5 );
 
 // Register shortcode
 add_shortcode( 'wikilookup', 'wikilookup_shortcode' );
 
 // Add plugin file
-// add_action( 'wp_enqueue_scripts', 'wikilookup_scripts' );
 add_action( 'wp_enqueue_scripts', [ 'Wikilookup\Loader', 'loadAssets'  ] );

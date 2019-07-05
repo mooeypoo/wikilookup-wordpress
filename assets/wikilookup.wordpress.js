@@ -1,16 +1,15 @@
 ( function ( $ ) {
 	$( document ).ready( function () {
+		var settings;
+
+		wp_wikilookup_vars = wp_wikilookup_vars || {};
+
+		settings = wp_wikilookup_vars.settings;
 
 		$( 'body' ).wikilookup( {
-			sources: {
-				'default': {
-					useRestbase: true
-				},
-				'trek': {
-					useRestbase: false,
-					baseURL: 'https://sto.gamepedia.com/api.php'
-				}
-			}
+			messages: settings.messages,
+			trigger: settings.trigger || 'click',
+			sources: settings.sources
 		} );
 
 		// Put the view in the display for this demo
@@ -24,7 +23,14 @@
 				} );
 
 			$( 'body' ).append( popup.$element );
-			$( this ).on( 'click', popup.toggle.bind( popup ) );
+			if ( settings.trigger === 'mouseenter' ) {
+				$( this ).hover(
+					popup.toggle.bind( popup, true ), // Handler in
+					popup.toggle.bind( popup, false ) // Handler out
+				);
+			} else {
+				$( this ).on( 'click', popup.toggle.bind( popup ) );
+			}
 		} );
 	} );
 }( jQuery) );

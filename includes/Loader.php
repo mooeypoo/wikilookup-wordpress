@@ -3,6 +3,34 @@
 namespace Wikilookup;
 
 class Loader {
+	public static function addSettingsLink( $links ) {
+		$links['settings'] = '<a href="' .
+			admin_url( 'admin.php?page=wikilookup-settings' ) .
+			'">' . __('Settings') . '</a>';
+		return $links;
+	}
+
+	public static function loadSettingsPageAssets( $hook ) {
+		if ( $hook !== 'toplevel_page_wikilookup-settings' ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'wikilookup-settings-js',
+			WIKILOOKUP_DIR_URL . 'assets/admin/settings.js',
+			[ 'jquery' ],
+			'1.1',
+			true // in footer
+		);
+		wp_enqueue_style(
+			'wikilookup-settings-css',
+			WIKILOOKUP_DIR_URL . 'assets/admin/settings.css'
+		);
+
+		$jsVars = get_option( 'wikilookup_settings' );
+		wp_localize_script( 'wikilookup-settings-js', 'wp_wikilookup_vars', $jsVars );
+	}
+
 	public static function loadAssets() {
 		$scripts = [
 			// ooui popup widgets
@@ -24,7 +52,7 @@ class Loader {
 			],
 			// wikilookup
 			'wikilookup' => [
-				'src' => 'assets/jquery.wikilookup-0.1.0.min.js',
+				'src' => 'assets/jquery.wikilookup-1.0.0.min.js',
 				'dependencies' => [ 'jquery' ]
 			],
 			// popup code
@@ -33,18 +61,24 @@ class Loader {
 				'dependencies' => [  'jquery', 'wikilookup', 'ooui-wikimediaui' ],
 			]
 		];
-
 		$styles = [
+			// TODO: Load RTL styles if wordpress is defined to be RTL
 			'wikimediaui' => 'assets/css/oojs-ui-wikimediaui.min.css',
 			'widgets.wikimediaui' => 'assets/css/oojs-ui-widgets-wikimediaui.min.css',
-			'wikilookup' => 'assets/jquery.wikilookup-0.1.0.min.css',
+			'wikilookup' => 'assets/jquery.wikilookup-1.0.0.min.css',
 			'popup' => 'assets/css/wikilookup.wordpress.css',
 		];
+
+		if ( is_rtl() ) {
+			// Replace stylesheets with RTL-specific ones.
+			$styles[ 'wikimediaui' ] = 'assets/css/oojs-ui-wikimediaui.rtl.min.css';
+			$styles[ 'widgets.wikimediaui' ] = 'assets/css/oojs-ui-widgets-wikimediaui.rtl.min.css';
+		}
 
 		foreach ( $scripts as $name => $data ) {
 			wp_enqueue_script(
 				'wikilookup-js-' . $name,
-				WIKILOOKUP_PLUGIN_DIR_URL . $data[ 'src'],
+				WIKILOOKUP_DIR_URL . $data[ 'src'],
 				array_map(
 					function ( $item ) {
 						return $item === 'jquery' ?
@@ -62,15 +96,15 @@ class Loader {
 			// CSS
 			wp_enqueue_style(
 				'wikilookup-css-' . $name,
-				WIKILOOKUP_PLUGIN_DIR_URL . $src
+				WIKILOOKUP_DIR_URL . $src
 			);
 		}
 
-		// $dataToBePassed = array(
-		// 	'home'            => get_stylesheet_directory_uri(),
-		// 	'pleaseWaitLabel' => __( 'Please wait...', 'default' )
-		// );
-		// wp_localize_script( 'popup', 'wp_wikilookup_config', $datatoBePassed );
+		$jsVars = [
+			// 'home'            => get_stylesheet_directory_uri(),
+			'settings' => get_option( 'wikilookup_settings' ),
+		];
+		wp_localize_script( 'wikilookup-js-popup', 'wp_wikilookup_vars', $jsVars );
 	}
 
 }

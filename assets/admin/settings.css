@@ -1,0 +1,68 @@
+.wl-sources th,
+.wl-sources tbody td {
+	text-align: center;
+}
+
+.wl-settings h3 {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 0.5em;
+}
+
+.wl-sources-inp-lang,
+.wl-sources-head-lang,
+.wl-sources-head-restbase,
+.wl-sources-head-actions {
+	width: 3em;
+}
+
+.wl-sources-inp-name {
+	width: 4em;
+}
+
+.wl-sources-head-actions {
+	min-width: 130px;
+}
+
+.wl-sources-new {
+	display: none;
+}
+
+.wl-inp-error {
+	border: 2px solid red !important;
+}
+
+/* Add new source button */
+.wl-sources a.button.wl-sources-add {
+	padding-left: 0;
+	vertical-align: middle;
+	margin-left: 1em;
+}
+.wl-sources-add:before {
+	content: "\f132";
+	-webkit-font-smoothing: antialiased;
+	font: normal 30px/1 'dashicons';
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	width: 30px;
+	height: 30px;
+}
+
+/* Delete button */
+.wl-sources a.button.wl-sources-inp-delete {
+	background-color: #e15d5d;
+	color: #fff;
+	padding-left: 0;
+}
+.wl-sources-inp-delete:before {
+	content: "\f335";
+	-webkit-font-smoothing: antialiased;
+	font: normal 30px/1 'dashicons';
+	display: inline-block;
+	color: #fff;
+	height: 30px;
+	position: relative;
+	top: -2px;
+	vertical-align: middle;
+	width: 30px;
+}
