@@ -47,8 +47,12 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 		<table class="form-table">
 			<tbody>
 				<tr>
-					<th><?php _e( 'Text for "Read more"' ) ?></td>
-					<td><input class="regular-text" id="wikilookup-messages-link" type="text" name="wikilookup[messages][link]" value="<?php echo $this->getSettingValue([ 'messages', 'link']); ?>" /></td>
+					<th><?php _e( 'Text for the link to the original article' ) ?></td>
+					<td><input class="regular-text" id="wikilookup-messages-link" type="text" name="wikilookup[messages][articleLink]" value="<?php echo $this->getSettingValue([ 'messages', 'articleLink']); ?>" /></td>
+				</tr>
+				<tr>
+					<th><?php _e( 'Text for the link to the article history' ) ?></td>
+					<td><input class="regular-text" id="wikilookup-messages-history" type="text" name="wikilookup[messages][articleHistory]" value="<?php echo $this->getSettingValue([ 'messages', 'articleHistory']); ?>" /></td>
 				</tr>
 				<tr>
 					<th><?php _e( 'Text for the pending state' ) ?></td>
@@ -103,7 +107,7 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 							<input class="wl-sources-inp-url" type="text" id="wikilookup-sources-default-url" name="wikilookup[sources][0][baseURL]" value="<?php echo \Wikilookup\Utils::getPropValue( $defaultSource, 'baseURL' ); ?>" />
 						</td>
 						<td><input class="wl-sources-inp-lang" type="text" id="wikilookup-sources-default-lang" name="wikilookup[sources][0][lang]" value="<?php echo \Wikilookup\Utils::getPropValue( $defaultSource, 'lang' ); ?>" /></td>
-						<td><input class="wl-sources-inp-restbase" type="checkbox" id="wikilookup-sources-default-restbase" name="wikilookup[sources][0][restBase]" <?php echo \Wikilookup\Utils::getPropValue( $defaultSource, 'restBase' ) ? 'checked="checked"' : ''; ?>></td>
+						<td><input class="wl-sources-inp-restbase" type="checkbox" id="wikilookup-sources-default-restbase" name="wikilookup[sources][0][useRestbase]" <?php echo \Wikilookup\Utils::getPropValue( $defaultSource, 'useRestbase' ) ? 'checked="checked"' : ''; ?>></td>
 						<td>&nbsp;</td>
 					</tr>
 <?php
@@ -121,7 +125,7 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 						<td><input name="wikilookup[sources][<?php echo $counter ?>][name]" class="wl-sources-inp-name" type="text" value="<?php echo $name ?>" />
 						<td><input name="wikilookup[sources][<?php echo $counter ?>][baseURL]" class="wl-sources-inp-url" type="text" value="<?php echo $data['baseURL']; ?>" />
 						<td><input name="wikilookup[sources][<?php echo $counter ?>][lang]" class="wl-sources-inp-lang" type="text" value="<?php echo $data['lang']; ?>" />
-						<td><input name="wikilookup[sources][<?php echo $counter ?>][restBase]" class="wl-sources-inp-restbase" type="checkbox" <?php echo $data['restBase'] ? 'checked="checked"' : ''; ?>"></td>
+						<td><input name="wikilookup[sources][<?php echo $counter ?>][useRestbase]" class="wl-sources-inp-restbase" type="checkbox" <?php echo $data['useRestbase'] ? 'checked="checked"' : ''; ?>></td>
 						<td><a href="#" class="button button-secondary wl-sources-inp-delete"><?php _e( 'Remove' ) ?></a></td>
 					</tr>
 <?php

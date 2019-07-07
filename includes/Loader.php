@@ -62,11 +62,11 @@ class Loader {
 			]
 		];
 		$styles = [
-			// TODO: Load RTL styles if wordpress is defined to be RTL
 			'wikimediaui' => 'assets/css/oojs-ui-wikimediaui.min.css',
 			'widgets.wikimediaui' => 'assets/css/oojs-ui-widgets-wikimediaui.min.css',
 			'wikilookup' => 'assets/jquery.wikilookup-1.0.0.min.css',
 			'popup' => 'assets/css/wikilookup.wordpress.css',
+			'popup-mobile' => 'assets/css/popup.mobile.corrections.css',
 		];
 
 		if ( is_rtl() ) {

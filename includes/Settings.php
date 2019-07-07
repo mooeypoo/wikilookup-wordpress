@@ -11,7 +11,8 @@ class Settings {
 		$this->defaults = [
 			'trigger' => 'click',
 			'messages' => [
-				'link' => 'Read more',
+				'articleLink' => 'Go to the original article',
+				'articleHistory' => 'Article history',
 				'pending' => 'Loading...',
 				'error' => 'There was a problem loading this page information.'
 			],
@@ -19,7 +20,7 @@ class Settings {
 				'default' => [
 					'baseURL' => 'https://{{lang}}.wikipedia.org/w/api.php',
 					'lang' => 'en',
-					'restBase' => false
+					'useRestbase' => false
 				]
 			]
 		];
@@ -49,14 +50,15 @@ class Settings {
 			$sources[ $data['name'] ] = [
 				'baseURL' => Utils::getPropValue( $data, 'baseURL' ),
 				'lang' => Utils::getPropValue( $data, 'lang' ),
-				'restBase' => !!Utils::getPropValue( $data, 'restBase' ),
+				'useRestbase' => !!Utils::getPropValue( $data, 'useRestbase' ),
 			];
 		}
 
 		$newSettings = [
 			'trigger' => $results['trigger'],
 			'messages' => [
-				'link' => sanitize_text_field( $results['messages']['link'] ),
+				'articleLink' => sanitize_text_field( $results['messages']['articleLink'] ),
+				'articleHistory' => sanitize_text_field( $results['messages']['articleHistory'] ),
 				'pending' => sanitize_text_field( $results['messages']['pending'] ),
 				'error' => sanitize_text_field( $results['messages']['error'] ),
 			],
