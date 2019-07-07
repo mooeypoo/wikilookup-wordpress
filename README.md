@@ -25,18 +25,18 @@ You can change several aspects of the popup display through the settings page.
 * **Display text** - You can change the way some of the messaging appears in the popup, from the loading text, to the credits and links.
 * **Sources** - Define the source information that Wikilookup will use.
 
-#### About Sources
+### Sources
 The sources are where Wikilookup popup searches for the page information it will display.
 
 The default source is defined as the Wikipedia sites with the default language set to 'en'. You can change the default or add your own sources.
 
-##### Source baseURL
+#### Source baseURL
 Source definitions must be wiki websites that use [MediaWiki](https://www.mediawiki.org) as software, since they expect the API response from a wiki.
 
-##### Source languages
+#### Source languages
 If your defined source is in a wiki farm that has dynamic language (similar to Wikipedia where `en.wikipedia.org` is English and `es.wikipedia.org` is Spanish, etc) you will need to represent that in your `baseURL` by the `{{lang}}` attribute. The system will then allow you to use `lang="xx"` in the shortcode to switch the language without defining a new source name.
 
-##### Source Restbase
+#### Source Restbase
 Restbase is an API technology and format. It is offered for wikis that run MediaWiki but needs to be set up separately, and offers slightly different format than the base API technology.
 
 You should only use this if the wiki you are fetching from uses Restbase and you intentionally mean to use it instead of the base API.
