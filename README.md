@@ -3,7 +3,7 @@ Add the power of Wikipdia to your WordPress website!
 
 
 ## Install
-** Please note: This plugin is in beta testing mode. When beta testing ends, it will be avilable in the WordPress plugin store, and installation will be possible through the installer. **
+**Please note: This plugin is in beta testing mode. When beta testing ends, it will be avilable in the WordPress plugin store, and installation will be possible through the installer.**
 
 * Download the plugin files.
 * Extract the folder in your `wp-content/plugins/` in your WordPress installation.
@@ -41,7 +41,7 @@ Restbase is an API technology and format. It is offered for wikis that run Media
 
 You should only use this if the wiki you are fetching from uses Restbase and you intentionally mean to use it instead of the base API.
 
-** Note that if you mark "Restbase" without the wiki use restbase, the popups will never display any pages.**
+**Note that if you mark "Restbase" without the wiki use restbase, the popups will never display any pages.**
 
 ## Credits and contribution
 This plugin was written by [Moriel Schottlender](http://moriel.smarterthanthat.com), under a GPL-v3 license.
