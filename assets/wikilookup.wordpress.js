@@ -12,14 +12,15 @@
 			sources: settings.sources
 		} );
 
-		// Put the view in the display for this demo
+		// Create the popups
 		$( '[data-wikilookup]' ).each( function () {
 			var widget = $( this ).data( 'wl-widget' ),
 				popup = new OO.ui.PopupWidget( {
 					width: 700,
 					$floatableContainer: $( this ),
 					$content: widget.$element,
-					autoClose: true
+					autoClose: true,
+					hideWhenOutOfView: false
 				} );
 
 			$( 'body' ).append( popup.$element );
