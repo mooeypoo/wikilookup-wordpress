@@ -9,10 +9,10 @@
  *
  * @wordpress-plugin
  * Plugin Name: Wikilookup
- * Plugin URI:  http://moriel.smarterthanthat.com/
+ * Plugin URI:  https://github.com/mooeypoo/wikilookup-wordpress
  * Description: Description of the plugin.
  * Version:     1.0.0
- * Author:      Your Name
+ * Author:      Moriel Schottlender
  * Author URI:  http://moriel.smarterthanthat.com/
  * Text Domain: wikilookup
  * License:     GPL-3.0
