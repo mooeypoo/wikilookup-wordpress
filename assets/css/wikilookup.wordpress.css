@@ -1,5 +1,6 @@
 [data-wikilookup] {
 	border-bottom: 1px dashed #666;
+	cursor: pointer;
 }
 
 /* Popup */
