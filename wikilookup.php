@@ -11,7 +11,7 @@
  * Plugin Name: Wikilookup
  * Plugin URI:  https://github.com/mooeypoo/wikilookup-wordpress
  * Description: Description of the plugin.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Moriel Schottlender
  * Author URI:  http://moriel.smarterthanthat.com/
  * Text Domain: wikilookup
