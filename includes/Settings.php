@@ -21,7 +21,11 @@ class Settings {
 				'default' => [
 					'baseURL' => 'https://{{lang}}.wikipedia.org/w/api.php',
 					'lang' => 'en',
-					'useRestbase' => false
+					'useRestbase' => false,
+					'logo' => [
+						'url' => '',
+						'title' => '',
+					],
 				]
 			]
 		];
@@ -45,6 +49,9 @@ class Settings {
 		}
 
 		$results = $_POST[ 'wikilookup' ];
+
+		$currTab = Utils::getPropValue( $_POST, 'wl_tab' );
+
 		// Build sources
 		$sources = [];
 		foreach ( $results['sources'] as $index => $data ) {
@@ -52,6 +59,10 @@ class Settings {
 				'baseURL' => Utils::getPropValue( $data, 'baseURL' ),
 				'lang' => Utils::getPropValue( $data, 'lang' ),
 				'useRestbase' => !!Utils::getPropValue( $data, 'useRestbase' ),
+				'logo' => [
+					'url' => Utils::getPropValue( $data, [ 'logo', 'url' ] ),
+					'title' => Utils::getPropValue( $data, [ 'logo', 'title' ] ),
+				]
 			];
 		}
 
@@ -77,7 +88,7 @@ class Settings {
 					[
 						'wl_notice' => 'success',
 					],
-				admin_url('admin.php?page=wikilookup-settings' )
+				admin_url('admin.php?page=wikilookup-settings&tab=' . $currTab )
 				)
 			)
 		);
