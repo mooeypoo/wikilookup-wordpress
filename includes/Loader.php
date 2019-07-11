@@ -52,7 +52,7 @@ class Loader {
 			],
 			// wikilookup
 			'wikilookup' => [
-				'src' => 'assets/jquery.wikilookup-0.1.0.min.js',
+				'src' => 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.js',
 				'dependencies' => [ 'jquery' ]
 			],
 			// popup code
@@ -64,7 +64,7 @@ class Loader {
 		$styles = [
 			'wikimediaui' => 'assets/css/oojs-ui-wikimediaui.min.css',
 			'widgets.wikimediaui' => 'assets/css/oojs-ui-widgets-wikimediaui.min.css',
-			'wikilookup' => 'assets/jquery.wikilookup-0.1.0.min.css',
+			'wikilookup' => 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.css',
 			'popup' => 'assets/css/wikilookup.wordpress.css',
 			'popup-mobile' => 'assets/css/popup.mobile.corrections.css',
 		];

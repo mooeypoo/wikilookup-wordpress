@@ -24,7 +24,8 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 	<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" id="wikilookup_settings_form" >
 		<input type="hidden" name="action" value="wikilookup_settings_form_response">
 		<input type="hidden" name="wikilookup_settings_form_nonce" value="<?php echo $wikilookup_nonce ?>" />
-
+<?php /*
+		// Holding back on this setting until this is resolved https://github.com/mooeypoo/wikilookup-wordpress/issues/5
 		<h3>General behavior</h3>
 		<table class="form-table">
 			<tbody>
@@ -42,7 +43,7 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 				</tr>
 			</tbody>
 		</table>
-
+*/ ?>
 		<h3>Display Text</h3>
 		<table class="form-table">
 			<tbody>
