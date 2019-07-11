@@ -22,6 +22,7 @@ include 'vendor/autoload.php';
 
 define( 'WIKILOOKUP_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'WIKILOOKUP_DIR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'WIKILOOKUP_DIST_VERSION', '0.1.0' );
 
 if ( is_admin() ) {
 	// Register Script

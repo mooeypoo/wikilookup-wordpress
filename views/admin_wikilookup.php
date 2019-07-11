@@ -47,8 +47,12 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 		<table class="form-table">
 			<tbody>
 				<tr>
+					<th><?php _e( 'Text for the "Read more" link' ) ?></td>
+					<td><input class="regular-text" id="wikilookup-messages-link" type="text" name="wikilookup[messages][link]" value="<?php echo $this->getSettingValue([ 'messages', 'link']); ?>" /></td>
+				</tr>
+				<tr>
 					<th><?php _e( 'Text for the link to the original article' ) ?></td>
-					<td><input class="regular-text" id="wikilookup-messages-link" type="text" name="wikilookup[messages][articleLink]" value="<?php echo $this->getSettingValue([ 'messages', 'articleLink']); ?>" /></td>
+					<td><input class="regular-text" id="wikilookup-messages-articleLink" type="text" name="wikilookup[messages][articleLink]" value="<?php echo $this->getSettingValue([ 'messages', 'articleLink']); ?>" /></td>
 				</tr>
 				<tr>
 					<th><?php _e( 'Text for the link to the article history' ) ?></td>

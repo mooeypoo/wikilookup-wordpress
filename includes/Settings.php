@@ -11,6 +11,7 @@ class Settings {
 		$this->defaults = [
 			'trigger' => 'click',
 			'messages' => [
+				'link' => 'Read more',
 				'articleLink' => 'Go to the original article',
 				'articleHistory' => 'Article history',
 				'pending' => 'Loading...',
@@ -57,6 +58,7 @@ class Settings {
 		$newSettings = [
 			'trigger' => $results['trigger'],
 			'messages' => [
+				'link' => sanitize_text_field( $results['messages']['link'] ),
 				'articleLink' => sanitize_text_field( $results['messages']['articleLink'] ),
 				'articleHistory' => sanitize_text_field( $results['messages']['articleHistory'] ),
 				'pending' => sanitize_text_field( $results['messages']['pending'] ),
