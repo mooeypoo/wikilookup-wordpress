@@ -60,22 +60,27 @@ class Loader {
 	public static function loadAssets() {
 		$scripts = [
 			// ooui popup widgets
-			'oojs' => [
-				'src' => 'assets/ooui/oojs.jquery.js',
+			// 'oojs' => [
+			// 	'src' => 'assets/ooui/oojs.jquery.js',
+			// 	'dependencies' => [ 'jquery' ],
+			// ],
+			// 'ooui-core' => [
+			// 	'src' => 'assets/ooui/oojs-ui-core.js',
+			// 	'dependencies' => [ 'oojs' ],
+			// ],
+			// 'ooui-widgets' => [
+			// 	'src' => 'assets/ooui/oojs-ui-widgets.js',
+			// 	'dependencies' => [ 'ooui-core' ],
+			// ],
+			// 'ooui-wikimediaui' => [
+			// 	'src' => 'assets/ooui/oojs-ui-wikimediaui.js',
+			// 	'dependencies' => [ 'ooui-widgets' ],
+			// ],
+			'bootstrap-bundle-js' => [
+				'src' => 'assets/popover/bootstrap.bundle.min.js',
 				'dependencies' => [ 'jquery' ],
 			],
-			'ooui-core' => [
-				'src' => 'assets/ooui/oojs-ui-core.js',
-				'dependencies' => [ 'oojs' ],
-			],
-			'ooui-widgets' => [
-				'src' => 'assets/ooui/oojs-ui-widgets.js',
-				'dependencies' => [ 'ooui-core' ],
-			],
-			'ooui-wikimediaui' => [
-				'src' => 'assets/ooui/oojs-ui-wikimediaui.js',
-				'dependencies' => [ 'ooui-widgets' ],
-			],
+
 			// wikilookup
 			'wikilookup' => [
 				'src' => 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.js',
@@ -84,22 +89,23 @@ class Loader {
 			// popup code
 			'popup' => [
 				'src' => 'assets/wikilookup.wordpress.js',
-				'dependencies' => [  'jquery', 'wikilookup', 'ooui-wikimediaui' ],
+				'dependencies' => [  'jquery', 'wikilookup' ],
 			]
 		];
 		$styles = [
-			'wikimediaui' => 'assets/css/oojs-ui-wikimediaui.min.css',
-			'widgets.wikimediaui' => 'assets/css/oojs-ui-widgets-wikimediaui.min.css',
+			// 'wikimediaui' => 'assets/css/oojs-ui-wikimediaui.min.css',
+			// 'widgets.wikimediaui' => 'assets/css/oojs-ui-widgets-wikimediaui.min.css',
 			'wikilookup' => 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.css',
+			'bootstrap-bundle-css' => 'assets/popover/bootstrap.min.css',
 			'popup' => 'assets/css/wikilookup.wordpress.css',
-			'popup-mobile' => 'assets/css/popup.mobile.corrections.css',
+			// 'popup-mobile' => 'assets/css/popup.mobile.corrections.css',
 		];
 
-		if ( is_rtl() ) {
-			// Replace stylesheets with RTL-specific ones.
-			$styles[ 'wikimediaui' ] = 'assets/css/oojs-ui-wikimediaui.rtl.min.css';
-			$styles[ 'widgets.wikimediaui' ] = 'assets/css/oojs-ui-widgets-wikimediaui.rtl.min.css';
-		}
+		// if ( is_rtl() ) {
+		// 	// Replace stylesheets with RTL-specific ones.
+		// 	$styles[ 'wikimediaui' ] = 'assets/css/oojs-ui-wikimediaui.rtl.min.css';
+		// 	$styles[ 'widgets.wikimediaui' ] = 'assets/css/oojs-ui-widgets-wikimediaui.rtl.min.css';
+		// }
 
 		foreach ( $scripts as $name => $data ) {
 			wp_enqueue_script(

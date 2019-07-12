@@ -3,17 +3,9 @@
 	cursor: pointer;
 }
 
-/* Popup */
-.wl-pageInfoWidget-box:first-child {
-	padding: 1em;
+.popover {
+	max-width: 650px;
 }
-
-.wl-pageInfoWidget-content-pending,
-.wl-pageInfoWidget-content-error {
-	padding: 1em;
-}
-
-.wl-pageInfoWidget-view-title {
-	font-size: 1.2em;
-	padding-bottom: 0.5em;
+.popover-body {
+	padding: 0;
 }
