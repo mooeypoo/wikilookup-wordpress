@@ -19,6 +19,7 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 		$this->outputNoticeBox( 'error', __( 'There was a problem saving settings.', 'wikilookup' ) );
 	}
 ?>
+	<p>You can configure your wiki popups in this page.</p>
 
 	<div style="background-image: url( '<?php echo WIKILOOKUP_DIR_URL; ?>/assets/spinner.gif' );" class="wl-spinner"></div>
 
@@ -30,7 +31,7 @@ $wikilookup_nonce = wp_create_nonce( 'wikilookup_settings_form_nonce' );
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-messages">Popup display</a></li>
-				<li><a href="#tabs-sources">Sources</a></li>
+				<li><a href="#tabs-sources">Other wikis</a></li>
 			</ul>
 			<div id="tabs-messages">
 				<h3>Display Text</h3>

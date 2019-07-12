@@ -65,17 +65,20 @@ th.wl-sources-head-actions {
 
 /* Delete button */
 .wl-sources a.button.wl-sources-inp-delete {
-	background-color: #e15d5d;
-	color: #fff;
+	/* background-color: #e15d5d; */
+	background-color: transparent;
+	color: #e15d5d;
 	padding-left: 0;
 	padding-right: 0;
+	box-shadow: none;
+	border: 0;
 }
 .wl-sources-inp-delete:before {
-	content: "\f335";
+	content: "\f182";
 	-webkit-font-smoothing: antialiased;
 	font: normal 30px/1 'dashicons';
 	display: inline-block;
-	color: #fff;
+	color: #e15d5d;
 	height: 30px;
 	position: relative;
 	top: -2px;
