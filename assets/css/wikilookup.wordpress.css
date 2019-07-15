@@ -3,9 +3,9 @@
 	cursor: pointer;
 }
 
-.popover {
+.wikilookup-popover-container .popover {
 	max-width: 650px;
 }
-.popover-body {
+.wikilookup-popover-container .popover-body {
 	padding: 0;
 }

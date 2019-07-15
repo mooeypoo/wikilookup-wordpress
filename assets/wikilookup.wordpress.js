@@ -1,6 +1,11 @@
 ( function ( $ ) {
 	$( document ).ready( function () {
-		var settings;
+		var settings,
+			$container = $( '<div>' ).addClass( 'wikilookup-popover-container' );
+
+		// Set container for the popovers so we don't pollute
+		// the CSS if there's another plugin that uses some .popover class
+		$( 'body' ).append( $container );
 
 		wp_wikilookup_vars = wp_wikilookup_vars || {};
 
@@ -19,7 +24,7 @@
 				delay: { show: 500, hide: 500 },
 				animation: true,
 				placement: 'auto',
-				container: 'body',
+				container: '.wikilookup-popover-container',
 				boundary: 'window',
 				html: true,
 				content: function () {
