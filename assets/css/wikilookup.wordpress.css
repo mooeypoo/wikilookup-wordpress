@@ -1,4 +1,4 @@
-[data-wikilookup] {
+[data-wl-popup] {
 	border-bottom: 1px dashed #666;
 	cursor: pointer;
 }
@@ -8,4 +8,11 @@
 }
 .wikilookup-popover-container .popover-body {
 	padding: 0;
+}
+
+.wl-card {
+	width: 100%;
+	font-size: 0.7em;
+	min-height: 200px;
+	border: 1px solid #666;
 }

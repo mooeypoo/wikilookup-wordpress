@@ -12,15 +12,33 @@
 
 		settings = wp_wikilookup_vars.settings;
 
+		// Popups
 		$( 'body' ).wikilookup( {
 			messages: settings.messages,
 			trigger: 'mouseenter',
-			sources: settings.sources
+			sources: settings.sources,
+			selector: '[data-wl-popup]'
 		} );
 
+		$( 'body' ).wikilookup( {
+			messages: settings.messages,
+			sources: settings.sources,
+			selector: '[data-wl-card]',
+			prefetch: true
+		} );
+
+		// Card displays
+		$( '[data-wl-card]' ).each( function () {
+			var widget = $( this ).data( 'wl-widget' ),
+				$card = $( this ).siblings( '.wl-card' );
+
+			$card.append( widget.$element );
+		} );
+
+		// Popup triggers
 		if ( settings.trigger === 'click' ) {
 			// Trigger == click
-			$( '[data-wikilookup]' ).each( function () {
+			$( '[data-wl-popup]' ).each( function () {
 				var self = this;
 				$( this ).popover( {
 					trigger: 'click',
@@ -48,7 +66,7 @@
 		} else {
 			// Trigger == hover
 			// Create the popups
-			$( '[data-wikilookup]' ).each( function () {
+			$( '[data-wl-popup]' ).each( function () {
 				$( this ).popover( {
 					trigger: 'manual',
 					delay: { show: 500, hide: 500 },

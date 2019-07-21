@@ -30,17 +30,52 @@ if ( is_admin() ) {
 	$wikilookup_settings = new Wikilookup\Settings();
 }
 
-
 // Add Shortcode
-function wikilookup_shortcode( $atts , $content = null ) {
+function wikipopup_shortcode( $atts , $content = null ) {
 	$nodeMaker = new \Wikilookup\NodeMaker();
 
 	return $nodeMaker->makeNode(
 		$content,
 		[
+			'data-wikilookup' => null,
 			'data-wl-title' => Wikilookup\Utils::getPropValue( $atts, 'title', $content ),
 			'data-wl-source' => Wikilookup\Utils::getPropValue( $atts, 'source', null ),
 			'data-wl-lang' => Wikilookup\Utils::getPropValue( $atts, 'lang', null ),
+			'data-wl-popup' => true,
+		]
+	);
+}
+
+// Add Shortcode
+function wikicard_shortcode( $atts , $content = null ) {
+	$nodeMaker = new \Wikilookup\NodeMaker();
+
+	$term = $nodeMaker->makeNode(
+		$content,
+		[
+			'data-wl-title' => Wikilookup\Utils::getPropValue( $atts, 'title', $content ),
+			'data-wl-source' => Wikilookup\Utils::getPropValue( $atts, 'source', null ),
+			'data-wl-lang' => Wikilookup\Utils::getPropValue( $atts, 'lang', null ),
+			'data-wl-card' => true,
+			'style' => 'display: none;'
+		],
+		'span',
+		false
+	);
+
+	$panel = $nodeMaker->makeNode(
+		'',
+		[
+			'class' => 'wl-card',
+		],
+		'div',
+		false
+	);
+
+	return $nodeMaker->wrap(
+		[ $term, $panel ],
+		[
+			'class' => 'wl-card-wrapper'
 		]
 	);
 }
@@ -48,7 +83,8 @@ function wikilookup_shortcode( $atts , $content = null ) {
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), [ 'Wikilookup\Loader', 'addSettingsLink' ], 10, 5 );
 
 // Register shortcode
-add_shortcode( 'wikilookup', 'wikilookup_shortcode' );
+add_shortcode( 'wikipopup', 'wikipopup_shortcode' );
+add_shortcode( 'wikicard', 'wikicard_shortcode' );
 
 // Add plugin file
 add_action( 'wp_enqueue_scripts', [ 'Wikilookup\Loader', 'loadAssets'  ] );
