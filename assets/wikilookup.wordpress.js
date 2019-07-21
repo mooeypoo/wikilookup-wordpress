@@ -1,6 +1,7 @@
 ( function ( $ ) {
 	$( document ).ready( function () {
 		var settings,
+			$popover,
 			$container = $( '<div>' ).addClass( 'wikilookup-popover-container' );
 
 		// Set container for the popovers so we don't pollute
@@ -17,21 +18,50 @@
 			sources: settings.sources
 		} );
 
-		// Create the popups
-		$( '[data-wikilookup]' ).each( function () {
-			$( this ).popover( {
-				trigger: 'manual',
-				delay: { show: 500, hide: 500 },
-				animation: true,
-				placement: 'auto',
-				container: '.wikilookup-popover-container',
-				boundary: 'window',
-				html: true,
-				content: function () {
-					var widget = $( this ).data( 'wl-widget' );
-					return widget.$element[ 0 ];
-				}
-			} )
+		if ( settings.trigger === 'click' ) {
+			// Trigger == click
+			$( '[data-wikilookup]' ).each( function () {
+				var self = this;
+				$( this ).popover( {
+					trigger: 'click',
+					delay: { show: 500, hide: 500 },
+					animation: true,
+					placement: 'auto',
+					container: '.wikilookup-popover-container',
+					boundary: 'window',
+					html: true,
+					content: function () {
+						var widget = $( this ).data( 'wl-widget' );
+						return widget.$element[ 0 ];
+					}
+				} );
+
+				$( document ).click( function () {
+					if (
+						!$( self ).is( ':hover' ) &&
+						!$( '.popover:hover' ).length
+					) {
+							$( self ).popover('hide');
+					}
+				} );
+			} );
+		} else {
+			// Trigger == hover
+			// Create the popups
+			$( '[data-wikilookup]' ).each( function () {
+				$( this ).popover( {
+					trigger: 'manual',
+					delay: { show: 500, hide: 500 },
+					animation: true,
+					placement: 'auto',
+					container: '.wikilookup-popover-container',
+					boundary: 'window',
+					html: true,
+					content: function () {
+						var widget = $( this ).data( 'wl-widget' );
+						return widget.$element[ 0 ];
+					}
+				} )
 				.on( 'mouseenter', function () {
 					var self = this;
 					$( this ).popover( 'show' );
@@ -49,6 +79,7 @@
 						}
 					}, 500 );
 				} );
-		} );
+			} );
+		}
 	} );
 }( jQuery) );

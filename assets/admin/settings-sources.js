@@ -1,15 +1,23 @@
 ( function ( $ ) {
 	$( document ).ready( function () {
+		// TODO: Organize this JS and add tests...
 		var counter = 1;
 			$container = $( '#wikilookup-sources' ),
 			vars = $.extend( {}, wp_wikilookup_vars ),
 			settings = vars.settings,
-			currentTab = vars.currentTab,
+			isWikipediaURL = function ( url ) {
+				var pattern = new RegExp(
+					'^https?:\/\/({{)?([a-zA-z\-\_]+)?(}})?\.wikipedia\.org',
+					'igm'
+				);
+
+				return pattern.test( url );
+			},
 			isUrlValid = function ( url ) {
-				var pattern = new RegExp( '^(https?:\\/\\/)?'+ // protocol
-					'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
-					'((\\d{1,3}\\.){3}\\d{1,3}))'+ // ip (v4) address
-					'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ //port
+				var pattern = new RegExp( '^(https?:\\/\\/)?' + // protocol
+					'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+					'((\\d{1,3}\\.){3}\\d{1,3}))' + // ip (v4) address
+					'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + //port
 					'(\\?[;&amp;a-z\\d%_.~+=-]*)?' ); // query string
 
 				return pattern.test( url );
@@ -18,14 +26,23 @@
 				var id = $textNode.attr( 'data-id' ),
 					str = $textNode.val(),
 					valid = isUrlValid( str ),
-					$img = $( '#logo-preview-' + id );
+					// $img = $( '#logo-preview-' + id ),
+					$img = $textNode.closest( 'tr' ).find( '.wl-logo-preview' ),
+					$wikipediaWarning = $textNode.closest( 'tr' ).find( '.wl-logo-wikipedia-statement' ),
+					sourceURL = $textNode.closest( 'tr' ).find( '.wl-sources-inp-url' ).val(),
+					isWikipedia = isWikipediaURL( sourceURL );
 
+				if ( !sourceURL ) {
+					return;
+				}
 				$textNode.removeClass( 'wl-inp-error' );
-				if ( str && valid ) {
+				if ( str && valid && !isWikipedia ) {
 					$img.attr( 'src', str );
 				}
 
-				$img.toggle( str && valid );
+				$img.toggle( str && valid && !isWikipedia );
+				$wikipediaWarning.toggle( isWikipedia );
+				$textNode.toggle( !isWikipedia );
 			},
 			getNewSourceRow = function () {
 				var $newSource = $( '.wl-sources-new' )
@@ -47,20 +64,14 @@
 					.attr( 'name', getName( 'logo' ) + '[url]' )
 				$newSource.find( '.wl-sources-inp-logo-title' )
 					.attr( 'name', getName( 'logo' ) + '[title]' );
+				$newSource.find( '.wl-logo-preview' )
+					.attr( 'id', 'logo-preview-' + counter );
 				$newSource.find( '.wl-sources-inp-restbase' )
 					.attr( 'name', getName( 'restBase' ) );
 
 				counter++;
 				return $newSource;
 			};
-
-		$( "#tabs" ).tabs( {
-			active: currentTab,
-			activate: function ( event, ui ) {
-				var chosenTab = ui.newTab.parent().children().index(ui.newTab);
-				$( '[name="wl_tab"]' ).val( chosenTab );
-			}
-		} );
 
 		$( '.wl-sources' ).on( 'click', '.wl-sources-inp-delete', function () {
 			$( this ).closest( 'tr' ).detach();
@@ -77,6 +88,20 @@
 		} );
 
 		// Validation
+		$( '.wl-sources' ).on( 'change', '.wl-sources-inp-url', function () {
+			var val = $( this ).val(),
+				urlValid = isUrlValid( val ),
+				isWikipedia = isWikipediaURL( val ),
+				$logoURLinp = $( this ).closest( 'tr' ).find( '.wl-sources-inp-logo-url' );
+
+			$( this ).toggleClass( 'wl-inp-error', !urlValid );
+			// $logoURLinp
+			// 	.toggle( !isWikipedia )
+			// 	.data( 'wikipedia', isWikipedia );
+
+			setPreviewImageURL( $logoURLinp );
+		} );
+
 		$( '.wl-sources' ).on( 'change', '.wl-sources-inp-name', function () {
 			$( this ).removeClass( 'wl-inp-error' );
 		} );
@@ -111,8 +136,18 @@
 
 		// Initialize
 		$( '.wl-sources-inp-logo-url' ).each( function () {
+			var val = $( this ).val(),
+				urlValid = isUrlValid( val ),
+				isWikipedia = isWikipediaURL( val );
+
+			$( this )
+				.toggleClass( 'wl-inp-error', urlValid );
+				// .toggle( !isWikipedia )
+				// .data( 'wikipedia', isWikipedia );
+
 			setPreviewImageURL( $( this ) );
 		} );
+
 		$( 'form#wikilookup_settings_form ' ).show();
 		$( '.wl-spinner' ).hide();
 	} );

@@ -11,50 +11,43 @@ class Loader {
 	}
 
 	public static function loadSettingsPageAssets( $hook ) {
-		if ( $hook !== 'toplevel_page_wikilookup-settings' ) {
+		$shouldLoad = false;
+
+		if ( $hook === 'toplevel_page_wikilookup-settings' ) {
+			$shouldLoad = true;
+			$jsFile = 'settings-main.js';
+		} else if ( $hook === 'wikilookup_page_wikilookup-settings-display' ) {
+			$shouldLoad = true;
+			$jsFile = 'settings-display.js';
+		} else if ( $hook === 'wikilookup_page_wikilookup-settings-sources' ) {
+			$shouldLoad = true;
+			$jsFile = 'settings-sources.js';
+		}
+
+		if ( !$shouldLoad ) {
 			return;
 		}
 
-		// jQuery TABS
-		wp_enqueue_script(
-			'wl-jquery-ui-tabs-js',
-			WIKILOOKUP_DIR_URL . 'assets/admin/tabs/jquery-ui.min.js',
-			[ 'jquery' ],
-			false,
-			true // in footer
-		);
-		wp_enqueue_style(
-			'wl-jquery-ui-tabs-css',
-			WIKILOOKUP_DIR_URL . 'assets/admin/tabs/jquery-ui.min.css'
-		);
-		wp_enqueue_style(
-			'wl-jquery-ui-tabs-theme.css',
-			WIKILOOKUP_DIR_URL . 'assets/admin/tabs/jquery-ui.theme.min.css'
-		);
-		wp_enqueue_style(
-			'wl-jquery-ui-tabs-theme.css',
-			WIKILOOKUP_DIR_URL . 'assets/admin/tabs/jquery-ui.structure.min.css'
-		);
-
 		// Plugin JS
-		wp_enqueue_script(
-			'wikilookup-settings-js',
-			WIKILOOKUP_DIR_URL . 'assets/admin/settings.js',
-			[ 'jquery' ],
-			false,
-			true // in footer
-		);
+		if ( $jsFile ) {
+			wp_enqueue_script(
+				'wikilookup-settings-js',
+				WIKILOOKUP_DIR_URL . 'assets/admin/' . $jsFile,
+				[ 'jquery' ],
+				false
+				// true // in footer
+			);
+			$jsVars = [
+				'settings' => get_option( 'wikilookup_settings' ),
+			];
+			wp_localize_script( 'wikilookup-settings-js', 'wp_wikilookup_vars', $jsVars );
+		}
+
 		// Plugin CSS
 		wp_enqueue_style(
 			'wikilookup-settings-css',
 			WIKILOOKUP_DIR_URL . 'assets/admin/settings.css'
 		);
-
-		$jsVars = [
-			'settings' => get_option( 'wikilookup_settings' ),
-			'currentTab' => \Wikilookup\Utils::getPropValue( $_GET, [ 'tab' ] ),
-		];
-		wp_localize_script( 'wikilookup-settings-js', 'wp_wikilookup_vars', $jsVars );
 	}
 
 	public static function loadAssets() {
@@ -112,5 +105,4 @@ class Loader {
 		];
 		wp_localize_script( 'wikilookup-js-popup', 'wp_wikilookup_vars', $jsVars );
 	}
-
 }

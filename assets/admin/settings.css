@@ -8,23 +8,16 @@
 	padding-bottom: 0.5em;
 }
 
-form#wikilookup_settings_form {
+.wl-logo-preview {
+	max-height: 50px;
+}
+
+.wl-logo-wikipedia-statement.description {
 	display: none;
 }
 
-.wl-spinner {
-	width: 200px;
-	height: 200px;
-	margin: 0 auto;
-}
-
-.wl-logo-preview-wrapper {
-	display: block;
-	margin: 0 auto;
-}
-
-.wl-logo-preview {
-	max-height: 50px;
+.wl-sources-head-logo {
+	min-width: 225px;
 }
 
 .wl-sources-inp-lang,

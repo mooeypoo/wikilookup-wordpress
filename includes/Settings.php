@@ -9,7 +9,7 @@ class Settings {
 	public function __construct() {
 		$this->settings = get_option( 'wikilookup_settings' );
 		$this->defaults = [
-			'trigger' => 'click',
+			'trigger' => 'mouseenter',
 			'messages' => [
 				'link' => 'Read more',
 				'articleLink' => 'Go to the original article',
@@ -29,14 +29,15 @@ class Settings {
 				]
 			]
 		];
-
 		$this->register();
 	}
 
 	public function processFormResponse() {
+		$view = isset( $_POST['viewName'] ) ? $_POST['viewName'] : 'main';
+		$nonceName = 'wikilookup_settings_' . $view . '_form_nonce';
 		if (
 			!isset( $_POST['wikilookup_settings_form_nonce'] ) ||
-			!wp_verify_nonce( $_POST['wikilookup_settings_form_nonce'], 'wikilookup_settings_form_nonce' )
+			!wp_verify_nonce( $_POST[ 'wikilookup_settings_form_nonce' ], $nonceName )
 		) {
 			wp_die(
 				__( 'Invalid nonce specified', 'Wikilookup' ),
@@ -49,37 +50,55 @@ class Settings {
 		}
 
 		$results = $_POST[ 'wikilookup' ];
-
-		$currTab = Utils::getPropValue( $_POST, 'wl_tab' );
+		$page = $_POST[ 'viewName' ];
 
 		// Build sources
-		$sources = [];
-		foreach ( $results['sources'] as $index => $data ) {
-			$sources[ $data['name'] ] = [
-				'baseURL' => Utils::getPropValue( $data, 'baseURL' ),
-				'lang' => Utils::getPropValue( $data, 'lang' ),
-				'useRestbase' => !!Utils::getPropValue( $data, 'useRestbase' ),
-				'logo' => [
-					'url' => Utils::getPropValue( $data, [ 'logo', 'url' ] ),
-					'title' => Utils::getPropValue( $data, [ 'logo', 'title' ] ),
+		if ( $page === 'sources' ) {
+			$sources = [];
+			foreach ( $results['sources'] as $index => $data ) {
+				$sources[ $data['name'] ] = [
+					'baseURL' => Utils::getPropValue( $data, 'baseURL' ),
+					'lang' => Utils::getPropValue( $data, 'lang' ),
+					'useRestbase' => !!Utils::getPropValue( $data, 'useRestbase' ),
+					'logo' => [
+						'url' => Utils::getPropValue( $data, [ 'logo', 'url' ] ),
+						'title' => Utils::getPropValue( $data, [ 'logo', 'title' ] ),
+					]
+				];
+			}
+
+			$newSettings = [
+				'sources' => $sources,
+			];
+		} else if ( $page === 'display' ) {
+			$newSettings = [
+				'messages' => [
+					'link' => sanitize_text_field( $results['messages']['link'] ),
+					'articleLink' => sanitize_text_field( $results['messages']['articleLink'] ),
+					'articleHistory' => sanitize_text_field( $results['messages']['articleHistory'] ),
+					'pending' => sanitize_text_field( $results['messages']['pending'] ),
+					'error' => sanitize_text_field( $results['messages']['error'] ),
 				]
 			];
+		} else if ( $page === 'main' ) {
+			$newSettings = [ 'trigger' => $results['trigger'] ];
 		}
 
-		$newSettings = [
-			'trigger' => $results['trigger'],
-			'messages' => [
-				'link' => sanitize_text_field( $results['messages']['link'] ),
-				'articleLink' => sanitize_text_field( $results['messages']['articleLink'] ),
-				'articleHistory' => sanitize_text_field( $results['messages']['articleHistory'] ),
-				'pending' => sanitize_text_field( $results['messages']['pending'] ),
-				'error' => sanitize_text_field( $results['messages']['error'] ),
-			],
-			'sources' => $sources,
-		];
-
 		// Save
-		update_option( 'wikilookup_settings', $newSettings );
+		update_option(
+			'wikilookup_settings',
+			array_merge(
+				$this->settings,
+				$newSettings
+			)
+		);
+
+		$redirectPage = 'wikilookup-settings';
+		if ( $view === 'display' ) {
+			$redirectPage = 'wikilookup-settings-display';
+		} else if ( $view === 'sources' ) {
+			$redirectPage = 'wikilookup-settings-sources';
+		}
 
 		// Redirect
 		wp_redirect(
@@ -88,7 +107,7 @@ class Settings {
 					[
 						'wl_notice' => 'success',
 					],
-				admin_url('admin.php?page=wikilookup-settings&tab=' . $currTab )
+				admin_url('admin.php?page=' . $redirectPage )
 				)
 			)
 		);
@@ -108,7 +127,7 @@ class Settings {
 		);
 	}
 
-	protected function getSettingValue( $param, $default = '' ) {
+	public function getSettingValue( $param, $default = '' ) {
 		$set = Utils::getPropValue( $this->settings, $param, null );
 		if ( $set ) {
 			return $set;
@@ -116,6 +135,7 @@ class Settings {
 		return Utils::getPropValue( $this->defaults, $param, $default );
 	}
 
+	// TODO: The 'actions' registration should probably go out of this class
 	protected function register() {
 		// Add post form action
 		add_action(
@@ -126,23 +146,49 @@ class Settings {
 		// Add settings menu
 		add_action(
 			'admin_menu',
-			// [ $this, 'addMenuPage' ]
-			function () {
-				add_menu_page(
-					'Wikilookup settings', // page_title
-					'Wikilookup', // menu_title
-					'manage_options', // capability
-					'wikilookup-settings', // menu_slug
-					[ $this, 'outputSettingsPage' ], // function
-					'dashicons-admin-comments', // icon_url
-					100 // position
-				);
-			}
+			[ $this, 'createAdminMenus' ]
 		);
-		// Add settings page
+
+		// Add settings to the db
 		add_action(
 			'admin_init',
 			[ $this, 'registerSettings' ]
+		);
+	}
+
+	public function createAdminMenus() {
+		// Top menu
+		add_menu_page(
+			'Wikilookup settings', // page_title
+			'Wikilookup', // menu_title
+			'manage_options', // capability
+			'wikilookup-settings', // menu_slug
+			function () {
+				$this->outputSettingsPage( 'main' );
+			},
+			'dashicons-admin-comments', // icon_url
+			100 // position
+		);
+
+		add_submenu_page(
+			'wikilookup-settings', // Parent slug
+			'Wikilookup : Display', // Page title
+			'Display settings', // menu title
+			'manage_options', // capability
+			'wikilookup-settings-display', // menu_slug
+			function () {
+				$this->outputSettingsPage( 'display' );
+			}
+		);
+		add_submenu_page(
+			'wikilookup-settings', // Parent slug
+			'Wikilookup : External wikis', // Page title
+			'External wikis', // menu title
+			'manage_options', // capability
+			'wikilookup-settings-sources', // menu_slug
+			function () {
+				$this->outputSettingsPage( 'sources' );
+			}
 		);
 	}
 
@@ -153,104 +199,22 @@ class Settings {
 			[ $this, 'sanitize' ] // sanitize_callback
 		);
 	}
-
-	public function outputSettingsPage() {
-		include_once( WIKILOOKUP_DIR_PATH . '/views/admin_wikilookup.php' );
-	}
-/*
-	public function outputFieldMessagesReadmore( $var ) {
-
-	private function getSettingValue( $key ) {
-		return isset( $this->settings[$key] ) ?
-			esc_attr( $this->settings[$key] ) : '';
-	}
-
-	public function outputField( $type, $key ) {
-		var_dump( $type, $key );
-		$input = '';
-		if ( $type === 'text' ) {
-			$input = '<input class="regular-text" type="text" name="wikilookup_settings['.$key.']" id="' .$key .'" value="%s">';
+	public function outputSettingsPage( $page ) {
+		switch ( $page ) {
+			case 'display':
+				$title = 'Wikilookup settings : Display settings';
+				break;
+			case 'sources':
+				$title = 'Wikilookup settings : External wikis';
+				break;
+			default:
+			case 'main':
+				$title = 'Wikilookup general settings';
+				break;
 		}
 
-		if ( !$input ) {
-			return;
-		}
-
-		printf(
-			$input,
-			$this->getSettingValue( $key )
-		);
+		$view = new View( $this, $page, $title );
+		$view->render();
 	}
 
-	public function sanitize( $input ) {}
-
-	/**
-	 * Output the HTML for the settings page
-	 *
-	 * @return [type] [description]
-	 *
-	public function outputSettingsPage() {
-		$this->settings = get_option( 'wikilookup_settings' );
-?>
-		<div class="wrap">
-			<h2>Wikilookup settings</h2>
-			<p>Set up your wikilookup popups</p>
-			<?php settings_errors(); ?>
-
-			<form method="post" action="options.php">
-				<?php
-					settings_fields( 'wikilookup_settings_group' );
-					do_settings_sections( 'wikilookup-settings-admin' );
-					submit_button();
-				?>
-			</form>
-		</div>
-<?php
-	// $messages = [
-	// 	'pending' => [
-	// 		'desc' => 'Loading state',
-	// 		'default' => 'Loading...',
-	// 	],
-	// 	'error' => [
-	// 		'desc' => 'Error state',
-	// 		'default' => 'There was a problem loading this page information.',
-	// 	],
-	// 	'link' => [
-	// 		'desc' => '"Read more" message',
-	// 		'default' => 'Read more',
-	// 	],
-	// ];
-// 	echo '<table class="form-table">';
-// 	foreach ( $messages as $type => $data ) {
-// 		$value = $messages[$type]['default'];
-// 		if (
-// 			isset( $this->settings['messages'] ) &&
-// 			isset( $this->settings['messages' ][ $type ] )
-// 		) {
-// 			$value = $this->settings['messages' ][ $type ];
-// 		}
-// ?>
-	<!-- <tr>
-		<th><label for="messages-<?php echo $type ?>"><?php echo $data['desc']; ?></label></th>
-		<td><input
-			type="text"
-			id="messages-<?php echo $type ?>"
-			name="<?php echo $this->$optionName;?>['messages']['<?php echo $type ?>']"
-			value="<?php echo $value;?>"
-			style="width: 100%;"
-			/>
-		</td>
-	</tr> -->
-<?php
-	// }
-	// echo '</table>';
-					// settings_fields( 'wikilookup_settings_option_group' );
-					// do_settings_sections( 'wikilookup-settings-admin' );
-					// submit_button();
-				// ?>
-			<!-- </form>
-		</div> -->
-
-<?php
-}*/
 }
