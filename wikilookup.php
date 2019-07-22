@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name: Wikilookup
  * Plugin URI:  https://github.com/mooeypoo/wikilookup-wordpress
- * Description: Description of the plugin.
+ * Description: Add content from Wikipedia and other wikis into your WordPress blog
  * Version:     1.0.2
  * Author:      Moriel Schottlender
  * Author URI:  http://moriel.smarterthanthat.com/

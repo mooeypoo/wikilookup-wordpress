@@ -1,0 +1,31 @@
+{
+  "name": "wordpress-wikilookup",
+  "version": "1.0.2",
+  "description": "Add content from Wikipedia and other wikis into your WordPress blog",
+  "main": "''",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mooeypoo/wikilookup-wordpress.git"
+  },
+  "keywords": [
+    "wikipedia",
+    "wiki",
+    "facts"
+  ],
+  "author": "Moriel Schottlender",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/mooeypoo/wikilookup-wordpress/issues"
+  },
+  "homepage": "https://github.com/mooeypoo/wikilookup-wordpress#readme",
+  "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-wp-i18n": "^1.0.3"
+  }
+}
