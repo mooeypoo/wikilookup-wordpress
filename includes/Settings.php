@@ -17,6 +17,14 @@ class Settings {
 				'pending' => 'Loading...',
 				'error' => 'There was a problem loading this page information.'
 			],
+			'popup' => [
+				'width' => '650px',
+				'hideThumb' => false,
+			],
+			'card' => [
+				'width' => '100%',
+				'hideThumb' => false,
+			],
 			'sources' => [
 				'default' => [
 					'baseURL' => 'https://{{lang}}.wikipedia.org/w/api.php',
@@ -78,7 +86,15 @@ class Settings {
 					'articleHistory' => sanitize_text_field( $results['messages']['articleHistory'] ),
 					'pending' => sanitize_text_field( $results['messages']['pending'] ),
 					'error' => sanitize_text_field( $results['messages']['error'] ),
-				]
+				],
+				'popup' => [
+					'width' => sanitize_text_field( $results['popup']['width'] ),
+					'hideThumb' => isset( $results['popup']['hideThumb'] ),
+				],
+				'card' => [
+					'width' => sanitize_text_field( $results['card']['width'] ),
+					'hideThumb' => isset( $results['card']['hideThumb'] ),
+				],
 			];
 		} else if ( $page === 'main' ) {
 			$newSettings = [ 'trigger' => $results['trigger'] ];

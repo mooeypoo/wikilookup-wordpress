@@ -3,9 +3,9 @@
 	cursor: pointer;
 }
 
-.wikilookup-popover-container .popover {
+/* .wikilookup-popover-container .popover {
 	max-width: 650px;
-}
+} */
 .wikilookup-popover-container .popover-body {
 	padding: 0;
 }
