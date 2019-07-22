@@ -29,6 +29,20 @@ define( 'WIKILOOKUP_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'WIKILOOKUP_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WIKILOOKUP_DIST_VERSION', '0.2.0' );
 
+// Languages
+function loadTextDomain() {
+	$domain = 'wikilookup';
+	$mo_file = WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . get_locale() . '.mo';
+
+	load_textdomain( $domain, $mo_file );
+	load_plugin_textdomain(
+		$domain,
+		false,
+		WIKILOOKUP_DIR_PATH . '/languages/'
+	);
+}
+add_action( 'init', 'loadTextDomain' );
+
 if ( is_admin() ) {
 	// Register Script
 	add_action( 'admin_enqueue_scripts', 'Wikilookup\Loader::loadSettingsPageAssets' );
