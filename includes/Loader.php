@@ -19,6 +19,21 @@ class Loader {
 		} else if ( $hook === 'wikilookup_page_wikilookup-settings-display' ) {
 			$shouldLoad = true;
 			$jsFile = 'settings-display.js';
+
+			// wikilookup
+			wp_enqueue_script(
+				'wikilookup-js-settings',
+				WIKILOOKUP_DIR_URL . 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.js',
+				[ 'jquery' ],
+				false,
+				true // in footer
+			);
+
+			wp_enqueue_style(
+				'wikilookup-css-settings',
+				WIKILOOKUP_DIR_URL . 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.css'
+			);
+
 		} else if ( $hook === 'wikilookup_page_wikilookup-settings-sources' ) {
 			$shouldLoad = true;
 			$jsFile = 'settings-sources.js';

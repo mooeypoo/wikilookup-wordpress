@@ -9,14 +9,13 @@
 		$( 'body' ).append( $container );
 
 		wp_wikilookup_vars = wp_wikilookup_vars || {};
-
-		settings = wp_wikilookup_vars.settings;
-
+		settings = $.extend( { popup: {}, card: {} }, wp_wikilookup_vars.settings );
 		// Popups
 		$( 'body' ).wikilookup( {
 			messages: settings.messages,
 			trigger: 'mouseenter',
 			sources: settings.sources,
+			hideThumb: !!settings.popup.hideThumb,
 			selector: '[data-wl-popup]'
 		} );
 
@@ -24,6 +23,7 @@
 			messages: settings.messages,
 			sources: settings.sources,
 			selector: '[data-wl-card]',
+			hideThumb: !!settings.card.hideThumb,
 			prefetch: true
 		} );
 
@@ -99,5 +99,9 @@
 				} );
 			} );
 		}
+
+		$( '<style>' )
+			.text( '.wikilookup-popover-container .popover { max-width: ' + ( settings.popup.width || '650px' ) + '}' )
+			.appendTo( 'head' );
 	} );
 }( jQuery) );
