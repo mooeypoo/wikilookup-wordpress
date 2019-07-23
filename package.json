@@ -1,6 +1,6 @@
 {
   "name": "wordpress-wikilookup",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Add content from Wikipedia and other wikis into your WordPress blog",
   "main": "''",
   "directories": {
