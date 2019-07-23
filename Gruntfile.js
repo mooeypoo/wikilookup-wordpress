@@ -19,5 +19,5 @@ module.exports = function Gruntfile( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'default', 'makepot' );
+	grunt.registerTask( 'lang', 'makepot' );
 };
