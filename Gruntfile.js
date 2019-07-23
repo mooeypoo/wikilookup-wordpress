@@ -1,15 +1,30 @@
 /* eslint-env node */
 module.exports = function Gruntfile( grunt ) {
-	var pkg = grunt.file.readJSON( 'package.json' );
+	var pkg = grunt.file.readJSON( 'package.json' ),
+		getReleasableAssets = function ( destination ) {
+			var list = [],
+				folders = [ 'assets', 'includes', 'languages', 'views', 'vendor' ],
+				files = [ 'LICENSE', 'changelog.txt' ];
+
+			folders.forEach( function ( folder ) {
+				list.push( {
+					expand: true, src: [ folder + '/**' ], dest: destination
+				} );
+			} );
+
+			list.push( {
+				src: files,
+				dest: destination
+			} );
+
+			return list;
+		};
 
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-composer' );
-	// grunt.loadNpmTasks( 'grunt-concat-with-template' );
-	// grunt.loadNpmTasks( 'grunt-template-replace' );
-	// grunt.loadNpmTasks('grunt-string-replace');
-	grunt.loadNpmTasks('grunt-replace');
+	grunt.loadNpmTasks( 'grunt-replace' );
 
 	// Initialize config
 	grunt.initConfig( {
@@ -29,34 +44,10 @@ module.exports = function Gruntfile( grunt ) {
 		},
 		copy: {
 			trunk: {
-				files: [
-					{ expand: true, src: [ 'assets/**' ], dest: '_release/trunk/' },
-					{ expand: true, src: [ 'includes/**' ], dest: '_release/trunk/' },
-					{ expand: true, src: [ 'languages/**' ], dest: '_release/trunk/' },
-					{ expand: true, src: [ 'vendor/**' ], dest: '_release/trunk/' },
-					{ expand: true, src: [ 'views/**' ], dest: '_release/trunk/' },
-					{
-						src: [
-							'LICENSE'
-						],
-						dest: '_release/trunk/'
-					}
-				]
+				files: getReleasableAssets( '_release/trunk/' ),
 			},
 			tag: {
-				files: [
-					{ expand: true, src: [ 'assets/**' ], dest: '_release/tags/' + pkg.version + '/' },
-					{ expand: true, src: [ 'includes/**' ], dest: '_release/tags/' + pkg.version + '/' },
-					{ expand: true, src: [ 'languages/**' ], dest: '_release/tags/' + pkg.version + '/' },
-					{ expand: true, src: [ 'vendor/**' ], dest: '_release/tags/' + pkg.version + '/' },
-					{ expand: true, src: [ 'views/**' ], dest: '_release/tags/' + pkg.version + '/' },
-					{
-						src: [
-							'LICENSE'
-						],
-						dest: '_release/tags/' + pkg.version + '/'
-					}
-				]
+				files: getReleasableAssets( '_release/tags/' + pkg.version + '/' )
 			}
 		},
 		replace: {
@@ -105,5 +96,5 @@ module.exports = function Gruntfile( grunt ) {
 
 	grunt.registerTask( 'lang', 'makepot' );
 	grunt.registerTask( 'trunk', [ 'clean:trunk', 'composer:install:no-dev', 'copy:trunk', 'replace:trunk' ] );
-	grunt.registerTask( 'releaseTag', [ 'copy:tag', 'replace:tag' ] );
+	grunt.registerTask( 'tag', [ 'copy:tag', 'replace:tag' ] );
 };

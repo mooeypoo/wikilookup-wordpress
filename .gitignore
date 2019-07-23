@@ -1,3 +1,5 @@
 vendor/
 node_modules/
 _release/trunk/
+_release/tags/*
+!_release/tags/.gitkeep
