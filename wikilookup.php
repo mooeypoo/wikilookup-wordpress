@@ -11,7 +11,7 @@
  * Plugin Name: Wikilookup
  * Plugin URI:  https://github.com/mooeypoo/wikilookup-wordpress
  * Description: Add content from Wikipedia and other wikis into your WordPress blog
- * Version:     1.0.2
+ * Version:     @@currentTag
  * Author:      Moriel Schottlender
  * Author URI:  http://moriel.smarterthanthat.com/
  * Text Domain: wikilookup

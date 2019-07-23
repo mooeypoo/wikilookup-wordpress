@@ -6,6 +6,10 @@ module.exports = function Gruntfile( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-composer' );
+	// grunt.loadNpmTasks( 'grunt-concat-with-template' );
+	// grunt.loadNpmTasks( 'grunt-template-replace' );
+	// grunt.loadNpmTasks('grunt-string-replace');
+	grunt.loadNpmTasks('grunt-replace');
 
 	// Initialize config
 	grunt.initConfig( {
@@ -21,11 +25,10 @@ module.exports = function Gruntfile( grunt ) {
 			}
 		},
 		clean: {
-			wordpress: [ '_release/trunk', 'vendor' ]
+			trunk: [ '_release/trunk', 'vendor' ]
 		},
-
 		copy: {
-			wordpress: {
+			trunk: {
 				files: [
 					{ expand: true, src: [ 'assets/**' ], dest: '_release/trunk/' },
 					{ expand: true, src: [ 'includes/**' ], dest: '_release/trunk/' },
@@ -34,17 +37,73 @@ module.exports = function Gruntfile( grunt ) {
 					{ expand: true, src: [ 'views/**' ], dest: '_release/trunk/' },
 					{
 						src: [
-							'LICENSE',
-							'readme.txt',
-							'wikilookup.php'
+							'LICENSE'
 						],
 						dest: '_release/trunk/'
 					}
 				]
+			},
+			tag: {
+				files: [
+					{ expand: true, src: [ 'assets/**' ], dest: '_release/tags/' + pkg.version + '/' },
+					{ expand: true, src: [ 'includes/**' ], dest: '_release/tags/' + pkg.version + '/' },
+					{ expand: true, src: [ 'languages/**' ], dest: '_release/tags/' + pkg.version + '/' },
+					{ expand: true, src: [ 'vendor/**' ], dest: '_release/tags/' + pkg.version + '/' },
+					{ expand: true, src: [ 'views/**' ], dest: '_release/tags/' + pkg.version + '/' },
+					{
+						src: [
+							'LICENSE'
+						],
+						dest: '_release/tags/' + pkg.version + '/'
+					}
+				]
+			}
+		},
+		replace: {
+			trunk: {
+				files: [
+					{
+						src: 'readme.txt',
+						dest: '_release/trunk/readme.txt'
+					},
+					{
+						src: 'wikilookup.php',
+						dest: '_release/trunk/wikilookup.php'
+					}
+				],
+				options: {
+					patterns: [
+						{
+							match: 'currentTag',
+							replacement:  pkg.version
+						}
+					]
+				}
+			},
+			tag: {
+				files: [
+					{
+						src: 'readme.txt',
+						dest: '_release/tags/' + pkg.version + '/readme.txt'
+					},
+					{
+						src: 'wikilookup.php',
+						dest: '_release/tags/' + pkg.version + '/wikilookup.php'
+					}
+				],
+				options: {
+					patterns: [
+						{
+							match: 'currentTag',
+							replacement:  pkg.version
+						}
+					]
+				}
 			}
 		}
 	} );
 
 	grunt.registerTask( 'lang', 'makepot' );
-	grunt.registerTask( 'deploy', [ 'clean:wordpress', 'composer:install:no-dev', 'copy:wordpress' ] );
+	grunt.registerTask( 'trunk', [ 'clean:trunk', 'composer:install:no-dev', 'copy:trunk', 'replace:trunk' ] );
+	grunt.registerTask( 'releaseTag', [ 'copy:tag', 'replace:tag' ] );
 };
