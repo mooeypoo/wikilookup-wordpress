@@ -37,9 +37,19 @@ Source definitions must be wiki websites that use [MediaWiki](https://www.mediaw
 #### Source languages
 If your defined source is in a wiki farm that has dynamic language (similar to Wikipedia where `en.wikipedia.org` is English and `es.wikipedia.org` is Spanish, etc) you will need to represent that in your `baseURL` by the `{{lang}}` attribute. The system will then allow you to use `lang="xx"` in the shortcode to switch the language without defining a new source name.
 
-## Credits and contribution
+## Credits
 * This plugin was written by [Moriel Schottlender](http://moriel.smarterthanthat.com), under a GPL-v3 license.
 * Design guidance by Nirzar Pangarkar
 * For a standalone plugin, see [jQuery.Wikilookup](https://github.com/mooeypoo/jquery.wikilookup)
 
 Please feel free to submit issues and pull requests.
+
+## Contributing
+To contribute and develop this plugin:
+
+1. Clone the repository
+2. Run `composer install`
+3. Run `npm install`
+4. Start writing code! :)
+
+Note: `grunt build` will create a releasable plugin directory in `_release/trunk`; that is the best way to test whether the changes you've made will work for a standalone plugin. To continuously test, you can add the plugin folder to a local WordPress installation and use that to develop and debug.

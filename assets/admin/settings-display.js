@@ -34,10 +34,10 @@
 
 		// Initialize values
 		cardWidget.$element.css( {
-			maxWidth: settings.card.width
+			maxWidth: settings.card.width || '100%'
 		} );
 		popupWidget.$element.css( {
-			maxWidth: settings.popup.width
+			maxWidth: settings.popup.width || '650px'
 		} );
 		cardWidget.$thumb.toggle(
 			!$( '#wikilookup-card-hideThumb' ).is( ':checked' )
