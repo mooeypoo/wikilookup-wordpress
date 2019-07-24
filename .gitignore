@@ -2,4 +2,6 @@ vendor/
 node_modules/
 _release/trunk/
 _release/tags/*
+_release/branches/*
 !_release/tags/.gitkeep
+!_release/branches/.gitkeep
