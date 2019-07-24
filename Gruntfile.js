@@ -96,5 +96,5 @@ module.exports = function Gruntfile( grunt ) {
 
 	grunt.registerTask( 'lang', 'makepot' );
 	grunt.registerTask( 'trunk', [ 'clean:trunk', 'composer:install:no-dev', 'copy:trunk', 'replace:trunk' ] );
-	grunt.registerTask( 'tag', [ 'copy:tag', 'replace:tag' ] );
+	grunt.registerTask( 'tag', [ 'composer:install:no-dev', 'copy:tag', 'replace:tag' ] );
 };
