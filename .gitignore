@@ -5,3 +5,4 @@ _release/tags/*
 _release/branches/*
 !_release/tags/.gitkeep
 !_release/branches/.gitkeep
+_release/.svn/

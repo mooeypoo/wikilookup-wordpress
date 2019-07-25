@@ -34,7 +34,7 @@ This plugin is community translated. Please help translate it!
 
 The base translation file is `languages/wikilookup.pot` and the textdomain is `wikilookup`.
 
-= Development =
+== Development ==
 The code for this plugin is available on [github for development](https://github.com/mooeypoo/wikilookup-wordpress). Please feel free to participate!
 
 == Installation ==
