@@ -37,6 +37,9 @@ class Settings {
 				]
 			]
 		];
+		if ( !$this->settings ) {
+			$this->settings = $this->defaults;
+		}
 		$this->register();
 	}
 
@@ -56,7 +59,6 @@ class Settings {
 				]
 			);
 		}
-
 		$results = $_POST[ 'wikilookup' ];
 		$page = $_POST[ 'viewName' ];
 
