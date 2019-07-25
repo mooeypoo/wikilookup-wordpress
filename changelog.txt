@@ -1,5 +1,8 @@
 == Changelog ==
 
+= v1.1.1
+* BUGFIX: Correctly pull settings for the first time the plugin activates.
+
 = v1.1.0
 * Add robust settings, including dynamic preview for display settings
 * Add setting to hide images
