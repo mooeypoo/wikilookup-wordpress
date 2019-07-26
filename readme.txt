@@ -86,3 +86,8 @@ Automatic updates should always work. However, as always, please ensure you back
 04. Wikilookup display settings
 05. Wikilookup external sources settings
 06. Wikilookup shortcodes in the editor
+
+== Upgrade Notice ==
+
+= 1.1.2 =
+Added detailed information and instructions for the shortcodes, and an ability to toggle dark mode.

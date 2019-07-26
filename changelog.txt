@@ -1,18 +1,22 @@
 == Changelog ==
 
-= v1.1.1
+= 1.1.2 =
+* Add support for dark mode
+* Add usage instructions and general guidance in a page that's visible to editors and admins
+
+= 1.1.1 =
 * BUGFIX: Correctly pull settings for the first time the plugin activates.
 
-= v1.1.0
+= 1.1.0 =
 * Add robust settings, including dynamic preview for display settings
 * Add setting to hide images
 * Split shortcode to [wikipopup] and [wikicard]
 * Update to bootstrap popovers
 
-= v1.0.1
+= 1.0.1 =
 * Update to jQuery.Wikilookup v1.0.1
 
-= v1.0.0
+= 1.0.0 =
 * Create [wikilookup] shortcode
 * Implement popups
 * Create basic settings
