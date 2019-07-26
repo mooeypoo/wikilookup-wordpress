@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wikilookup 1.0.2\n"
+"Project-Id-Version: Wikilookup @@currentTag\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-"
 "wikilookup\n"
-"POT-Creation-Date: 2019-07-22 03:57:16+00:00\n"
+"POT-Creation-Date: 2019-07-26 03:11:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-07-21 23:31-0500\n"
+"PO-Revision-Date: 2019-07-25 22:30-0500\n"
 "Language-Team: \n"
 "X-Generator: Poedit 2.2.3\n"
 "Last-Translator: \n"
@@ -21,15 +21,15 @@ msgstr ""
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Settings.php:51
+#: includes/Settings.php:55
 msgid "Invalid nonce specified"
 msgstr "התקבל סימון חד פעמי לא חוקי"
 
-#: includes/Settings.php:52
+#: includes/Settings.php:56
 msgid "Error"
 msgstr "שגיאה"
 
-#: includes/View.php:93
+#: includes/View.php:92
 msgid "You do not have permissions to manage these settings."
 msgstr "אין ברשותך הרשאות לנהל הגדרות אלה."
 
@@ -39,7 +39,7 @@ msgstr "ההגדרות נשמרו בהצלחה"
 
 #: views/_admin_header.php:7
 msgid "There was a problem saving settings."
-msgstr "הייתה בעיה בשמירת הגדרות."
+msgstr "אירעה בעיה בשמירת הגדרות."
 
 #: views/admin_wikilookup_display.php:3
 msgid "Popup Preview"
@@ -53,49 +53,232 @@ msgstr "תצוגה מקדימה של הכרטיס"
 msgid "General display settings"
 msgstr "הגדרות תצוגה כלליות"
 
-#: views/admin_wikilookup_display.php:15
+#: views/admin_wikilookup_display.php:19
+msgid "Use dark theme"
+msgstr "תשתמש בערכת צבעים כהה"
+
+#: views/admin_wikilookup_display.php:24
 msgid "Popup width"
 msgstr "רוחב החלונות הקופצים"
 
-#: views/admin_wikilookup_display.php:18
+#: views/admin_wikilookup_display.php:27
 msgid "The popup is best viewed at 650px and above."
 msgstr "החלונות הקופצים נצפים בצורה הטובה ביותר בגודל 650 פיקסלים ומעלה"
 
-#: views/admin_wikilookup_display.php:26
+#: views/admin_wikilookup_display.php:35
 msgid "Hide images in popups"
 msgstr "הסתר תמונות בחלונות הקופצים"
 
-#: views/admin_wikilookup_display.php:31
+#: views/admin_wikilookup_display.php:40
 msgid "Card width"
 msgstr "רוחב הכרטיסים"
 
-#: views/admin_wikilookup_display.php:41
+#: views/admin_wikilookup_display.php:50
 msgid "Hide images in cards"
 msgstr "הסתר תמונות בכרטיסים"
 
-#: views/admin_wikilookup_display.php:48
+#: views/admin_wikilookup_display.php:57
 msgid "Display Text"
 msgstr "תצוגת טקסט"
 
-#: views/admin_wikilookup_display.php:52
+#: views/admin_wikilookup_display.php:61
 msgid "Text for the \"Read more\" link"
 msgstr "טקסט לקישור \"קרא עוד\""
 
-#: views/admin_wikilookup_display.php:56
+#: views/admin_wikilookup_display.php:65
 msgid "Text for the link to the article history"
 msgstr "טקסט לקישור להיסטוריית המאמר"
 
-#: views/admin_wikilookup_display.php:60
+#: views/admin_wikilookup_display.php:69
 msgid "Text for the pending state"
 msgstr "טקסט למצב המתנה"
 
-#: views/admin_wikilookup_display.php:64
+#: views/admin_wikilookup_display.php:73
 msgid "Text for an error state"
 msgstr "טקסט למצב שגיאה"
 
-#: views/admin_wikilookup_main.php:8
+#: views/admin_wikilookup_general_info.php:3
+msgid "Welcome to Wikilookup!"
+msgstr "ברוכים הבאים לויקילוקאפ!"
+
+#: views/admin_wikilookup_general_info.php:5
+msgid ""
+"This plugin allows you to add popups from <a href=\"https://www.wikipedia."
+"org/\" target=\"_blank\">Wikipedia</a> (and other wikis) into your post "
+"content."
+msgstr ""
+"התוסף מאפשר לך להוסיף חלונות קופצים (פופאפ) <a href=\"https://www.wikipedia."
+"org/\" target=\"_blank\">מויקיפדיה</a> (ואתרי ויקי אחרים) לכתבות הבלוג שלך."
+
+#: views/admin_wikilookup_general_info.php:8
+msgid ""
+"There are two ways to use this plugin: A <strong>popup</strong> and a "
+"<strong>card</strong> (poster). Both methods have similar configurable "
+"parameters, but are being called in different ways."
+msgstr ""
+"ישנן שתי אפשרויות להשתמש בתוסף: כרטיס, וחלון קופץ (פופאפ). לשתי האפשרויות "
+"פרמטרים דומים, אך השימוש בהן שונה."
+
+#: views/admin_wikilookup_general_info.php:11
+msgid "Inserting shortcodes"
+msgstr "הכנסת קיצורי קוד"
+
+#: views/admin_wikilookup_general_info.php:12
+msgid ""
+"You can insert popups and cards with <em>shortcodes</em>. These are codes "
+"you type into your post as you write. Below is a reference to how to use the "
+"shortcodes and what options you can utilize."
+msgstr ""
+"ניתן להכניס חלונות קופצים (פופאפ) וכרטיסים באמצעות \"קיצורי קוד\". אלו הם "
+"קיצורים המאפשרים לך לסמן את המילים הרצויות בזמן כתיבת הפוסט."
+
+#: views/admin_wikilookup_general_info.php:14
+msgid "Popup options"
+msgstr "אפשרויות החלונות הקופצים"
+
+#: views/admin_wikilookup_general_info.php:15
+#: views/admin_wikilookup_general_info.php:50
+msgid "You can use multiple combinations of the examples below."
+msgstr "ניתן להשתמש במספר שילובים של האפשרויות המוצעות"
+
+#: views/admin_wikilookup_general_info.php:18
+#: views/admin_wikilookup_general_info.php:54
+msgid "Shortcode"
+msgstr "קוד קצר"
+
+#: views/admin_wikilookup_general_info.php:19 views/admin_wikilookup_main.php:7
 msgid "Popup trigger"
-msgstr "דרך הפעלת חלונות קופצים"
+msgstr "המילה המפעילה את החלון הקופץ"
+
+#: views/admin_wikilookup_general_info.php:20
+msgid "Popup article topic"
+msgstr "תוכן הערך המוצג"
+
+#: views/admin_wikilookup_general_info.php:21
+#: views/admin_wikilookup_general_info.php:56
+msgid "Description"
+msgstr "תיאור"
+
+#: views/admin_wikilookup_general_info.php:27
+msgid ""
+"Creates a popup that shows the article from your default wiki about "
+"\"Mountains\""
+msgstr ""
+"יוצר חלון קופץ המראה מידע מהערך \"Mountains\" שמגיע מהויקי המוגדרת כברירת "
+"מחדל"
+
+#: views/admin_wikilookup_general_info.php:33
+msgid ""
+"Creates a popup that shows the article from your default wiki about "
+"\"Mountains\", but the popup appears over the words \"very high hills\""
+msgstr ""
+"יוצר חלון קופץ המראה מידע מהערך \"Mountains\" שמגיע מהויקי המוגדרת כברירת "
+"מחדל, אך החלון קופץ מהמילים \"very high hills\""
+
+#: views/admin_wikilookup_general_info.php:39
+msgid ""
+"Creates a popup that shows the article from the Spanish version of your "
+"default wiki about \"Montaña\""
+msgstr ""
+"יוצר חלון קופץ המראה מידע מהערך \"Montaña\" שמגיע מהשפה הספרדית בויקי "
+"המוגדרת כברירת מחדל"
+
+#: views/admin_wikilookup_general_info.php:45
+msgid ""
+"Creates a popup that shows the article about \"Picard\" that is pulled from "
+"the external wiki you named \"trek\""
+msgstr ""
+"יוצר חלון קופץ המראה מידע מהערך \"Picard\" שמגיע מויקי חיצונית המוגדרת בשם "
+"\"trek\""
+
+#: views/admin_wikilookup_general_info.php:49
+msgid "Card options"
+msgstr "אפשרויות הכרטיס"
+
+#: views/admin_wikilookup_general_info.php:51
+msgid ""
+"Notice that you do not need to close a <code>[wikicard]</code> shortcode."
+msgstr "שימו לב, כרטיסים אינם דורשים סיומת קוד קצר של <code>[wikicard]</code> "
+
+#: views/admin_wikilookup_general_info.php:55
+msgid "Card article topic"
+msgstr "תוכן הערך המוצג"
+
+#: views/admin_wikilookup_general_info.php:61
+msgid ""
+"Creates a card that shows the article from your default wiki about "
+"\"Mountains\""
+msgstr ""
+"יוצר כרטיס המראה מידע מהערך \"Mountains\" שמגיע מהויקי המוגדרת כברירת מחדל"
+
+#: views/admin_wikilookup_general_info.php:66
+msgid ""
+"Creates a card that shows the article \"Montaña\" taken from the Spanish "
+"version of your default wiki"
+msgstr ""
+"יוצר כרטיס המראה מידע מהערך \"Montaña\" שמגיע מהשפה הספרדית בויקי המוגדרת "
+"כברירת מחדל"
+
+#: views/admin_wikilookup_general_info.php:71
+msgid ""
+"Creates a card that shows the article about \"Picard\" that is pulled from "
+"the external wiki you named \"trek\""
+msgstr ""
+"יוצר כרטיס המראה מידע מהערך \"Picard\" שמגיע מויקי חיצונית המוגדרת בשם \"trek"
+"\""
+
+#: views/admin_wikilookup_general_info.php:77
+msgid "Creating external sources"
+msgstr "יצירת מקורות חיצוניים"
+
+#: views/admin_wikilookup_general_info.php:80
+msgid ""
+"You can add more wikis to your blog and pull information from them by adding "
+"\"External wikis\" in the settings. To do that, go to the Wikilookup "
+"settings and choose \"External wikis.\""
+msgstr ""
+"ניתן להוסיף אתרי ויקי חיצוניים לבלוג ולהראות ערכים מהם באמצעות \"אתרי ויקי "
+"חיצוניים\" בהגדרות. על מנת להוסיף אתרים חיצוניים, יש ללכת להגדרות ויקילוקאפ, "
+"ולבחור \"אתרי ויקי חיצוניים\""
+
+#: views/admin_wikilookup_general_info.php:83
+msgid ""
+"You can define any wiki that operates on <a href=\"https://www.mediawiki.org/"
+"\" target=\"_blank\">MediaWiki</a>, and provide its api endpoint (usually "
+"ending with <code>api.php</code>)"
+msgstr ""
+"ניתן להגדיר כל אתר ויקי חיצוני אשר פועל על <a href=\"https://www.mediawiki."
+"org/\" target=\"_blank\">MediaWiki</a>, ומספק גישה ישירה לAPI (לרוב באמצעות "
+"קישור ל<code>api.php</code>)"
+
+#: views/admin_wikilookup_general_info.php:86
+msgid ""
+"Adding a source allows you to reference it when creating popups and cards, "
+"by explicitly adding <code>source=\"sourceName\"</code> in the shortcodes."
+msgstr ""
+"הוספת אתר ויקי חיצוני מאפשר להפנות אליו כאשר יוצרים חלונות קופצים או "
+"כרטיסים, ע\"י שימוש בפרמטר <code>source=\"sourceName\"</code> בקוד הקצר. "
+"ניתן להגדיר ולהשתמש גם בשמות בעברית."
+
+#: views/admin_wikilookup_general_info.php:89
+msgid "Click here to add external wikis to your blog."
+msgstr "לחץ כאן להוספת אתרי ויקי חיצוניים"
+
+#: views/admin_wikilookup_main.php:1
+msgid "General configuration of the Wikilookup plugin behavior."
+msgstr "הגדרות כלליות להתנהגות תוסף ויקילוקאפ."
+
+#: views/admin_wikilookup_main.php:11
+msgid "On click"
+msgstr "בלחיצה"
+
+#: views/admin_wikilookup_main.php:12
+msgid "On hover"
+msgstr "בזמן ריחוף"
+
+#: views/admin_wikilookup_main.php:14
+msgid "Determines how the popup appears."
+msgstr "קבע כיצד מופיעים החלונות הקופצים"
 
 #: views/admin_wikilookup_sources.php:1
 msgid ""
@@ -118,8 +301,8 @@ msgid ""
 "an entrypoint that includes the <code>api.php</code> at the end. "
 msgstr ""
 "ניתן להגדיר מקורות בדף הנוכחי. המקורות חייבים להפנות לויקי המריצה <a href="
-"\"https://www.mediawiki.org/\" target=\"_blank\">MediaWiki</a> עם גישה "
-"ישירה דרך <code>api.php</code>"
+"\"https://www.mediawiki.org/\" target=\"_blank\">MediaWiki</a> עם גישה ישירה "
+"דרך <code>api.php</code>"
 
 #: views/admin_wikilookup_sources.php:8
 msgid "Sources"
