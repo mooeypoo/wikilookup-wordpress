@@ -3,7 +3,7 @@ Add the power of Wikipedia to your WordPress Blog
 
 ## Install
 
-* Download the plugin files.
+* Download the plugin files from the official WordPress plugin store: https://wordpress.org/plugins/wikilookup/
 * Extract the folder in your `wp-content/plugins/` in your WordPress installation.
 * The plugin works out-of-the-box with the `[wikipopup]` and `[wikicard]` shortcodes.
 * To change configuration, visit the configuration page under your administration area.
