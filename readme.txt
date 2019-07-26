@@ -22,6 +22,29 @@ Wikilookup allows you to easily add popups and info cards from Wikipedia (and ot
 * Robust settings allowing you to control the text and general behavior of the popups and cards
 * Support displaying content in Right to Left languages
 
+== Usage ==
+This plugin offers two pieces: a popup, and a 'card', or a static poster, from Wikipedia or other wikis that operate on MediaWiki software.
+
+= Adding popups =
+To add a popup, while editing a post, surround your text with `[wikipopup]` shortcode. You can reference a language or a different source, if you've set one up.
+
+For example:
+- `[wikipopup]WordPress[/wikipopup]` - Displays a popup from English Wikipedia about the article "WordPress"
+- `[wikipopup title="WordPress"]This is some text[/wikipopup]` - Displays a popup from English Wikipedia about the article "WordPress", while the trigger text is 'This is some text'
+- `[wikipopup title="WordPress" source="ext"]This is some text[/wikipopup]` - Displays a popup from the external source you've defined as "ext", about the article "WordPress", while the trigger text is 'This is some text'
+
+You can define sources in "Settings -> Wikilookup -> External wikis".
+
+= Adding cards =
+To add a card, while editing a post, add a line with `[wikicard title="term"]`. You can reference a language or a different source, if you've set one up.
+
+For example:
+- `[wikicard title="WordPress"]` - Displays a static card from English Wikipedia about the article "WordPress".
+- `[wikicard title="WordPress" lang="es"]` - Displays a static card from Spanish Wikipedia about the article "WordPress".
+- `[wikicard title="WordPress" source="ext"]` - Displays a static card from the external source you've defined as "ext", about the article "WordPress".
+
+You can define sources in "Settings -> Wikilookup -> External wikis".
+
 = Settings =
 You can find the settings page in your Dashboard -> Wikilookup.
 
