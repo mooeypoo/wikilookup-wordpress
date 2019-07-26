@@ -37,11 +37,6 @@ Source definitions must be wiki websites that use [MediaWiki](https://www.mediaw
 #### Source languages
 If your defined source is in a wiki farm that has dynamic language (similar to Wikipedia where `en.wikipedia.org` is English and `es.wikipedia.org` is Spanish, etc) you will need to represent that in your `baseURL` by the `{{lang}}` attribute. The system will then allow you to use `lang="xx"` in the shortcode to switch the language without defining a new source name.
 
-## Credits
-* This plugin was written by [Moriel Schottlender](http://moriel.smarterthanthat.com), under a GPL-v3 license.
-* Design guidance by Nirzar Pangarkar
-* For a standalone plugin, see [jQuery.Wikilookup](https://github.com/mooeypoo/jquery.wikilookup)
-
 Please feel free to submit issues and pull requests.
 
 ## Contributing
@@ -53,3 +48,17 @@ To contribute and develop this plugin:
 4. Start writing code! :)
 
 Note: `grunt build` will create a releasable plugin directory in `_release/trunk`; that is the best way to test whether the changes you've made will work for a standalone plugin. To continuously test, you can add the plugin folder to a local WordPress installation and use that to develop and debug.
+
+### Using the Docker container
+The repository comes ready-made with a docker container that activates a new WordPress installation with the wikilookup plugin read from the `_release/trunk` folder.
+
+1. Create the trunk files by running `grunt trunk`
+2. Run docker-compose `docker-compose up`
+3. Change the code.... and to update, run `grunt trunk` again
+
+The docker container reads from the `_release/trunk` folder to mimic, as close as possible, the real plugin files, without the development files.
+
+## Credits
+* This plugin was written by [Moriel Schottlender](http://moriel.smarterthanthat.com), under a GPL-v3 license.
+* Design guidance by Nirzar Pangarkar
+* For a standalone plugin, see [jQuery.Wikilookup](https://github.com/mooeypoo/jquery.wikilookup)
