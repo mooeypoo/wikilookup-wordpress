@@ -2,7 +2,9 @@
 	$( document ).ready( function () {
 		var settings,
 			$popover,
-			$container = $( '<div>' ).addClass( 'wikilookup-popover-container' );
+			$container = $( '<div>' )
+				.addClass( 'wikilookup-popover-container' )
+				.addClass( 'wl-bootstrap' );
 
 		// Set container for the popovers so we don't pollute
 		// the CSS if there's another plugin that uses some .popover class
