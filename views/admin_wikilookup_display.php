@@ -6,11 +6,20 @@
 <h4><?php _e( 'Card Preview' ); ?></h4>
 <p class="description"><code>[wikicard title="mountain"]</code></p>
 <div class="wl-display-preview-card"></div>
-
+<h2>foo</h2>
 <?php $this->openForm(); ?>
 <h3><?php _e( 'General display settings' ); ?></h3>
 <table class="form-table">
 	<tbody>
+		<tr>
+			<th>&nbsp;</td>
+			<td>
+				<label for="wikilookup[dark]">
+					<input type="checkbox" class="regular-text" id="wikilookup-dark" name="wikilookup[dark]" value="1" data-setting="dark" <?php echo $this->settings->getSettingValue(['dark']) ? 'checked' : ''; ?> />
+					<?php _e( 'Use dark theme' ) ?>
+				</label>
+			</td>
+		</tr>
 		<tr>
 			<th><?php _e( 'Popup width' ) ?></td>
 			<td>

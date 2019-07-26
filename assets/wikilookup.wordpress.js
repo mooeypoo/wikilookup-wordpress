@@ -16,7 +16,8 @@
 			trigger: 'mouseenter',
 			sources: settings.sources,
 			hideThumb: !!settings.popup.hideThumb,
-			selector: '[data-wl-popup]'
+			selector: '[data-wl-popup]',
+			dark: !!settings.dark
 		} );
 
 		$( 'body' ).wikilookup( {
@@ -24,6 +25,7 @@
 			sources: settings.sources,
 			selector: '[data-wl-card]',
 			hideThumb: !!settings.card.hideThumb,
+			dark: !!settings.dark,
 			prefetch: true
 		} );
 

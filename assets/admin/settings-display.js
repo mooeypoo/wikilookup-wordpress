@@ -1,8 +1,8 @@
 ( function ( $ ) {
 	$( document ).ready( function () {
 		var settings = $.extend( { popup: {}, card: {} }, wp_wikilookup_vars.settings ),
-			popupWidget = new $.wikilookup.PageInfoWidget( { messages: settings.messages } ),
-			cardWidget = new $.wikilookup.PageInfoWidget( { messages: settings.messages } ),
+			popupWidget = new $.wikilookup.PageInfoWidget( { messages: settings.messages, dark: !!settings.dark } ),
+			cardWidget = new $.wikilookup.PageInfoWidget( { messages: settings.messages, dark: !!settings.dark } ),
 			mockData = {
 				title: "Mountain",
 				content: "<p class=\"mw-empty-elt\">\n\n</p>\n\n<p class=\"mw-empty-elt\">\n</p>\n\n<p>A <b>mountain</b> is a large landform that rises above the surrounding land in a limited area, usually in the form of a peak. A mountain is generally steeper than a hill. Mountains are formed through tectonic forces or volcanism. These forces can locally raise the surface of the earth. Mountains erode slowly through the action of rivers, weather conditions, and glaciers.</p>",
@@ -47,6 +47,10 @@
 		);
 
 		// Events
+		$( '#wikilookup-dark' ).change( function () {
+			cardWidget.toggleDarkMode( $( this ).is( ':checked' ) )
+			popupWidget.toggleDarkMode( $( this ).is( ':checked' ) )
+		} );
 		$( '#wikilookup-popup-width' ).keyup( function () {
 			var val = $( this ).val();
 

@@ -10,6 +10,7 @@ class Settings {
 		$this->settings = get_option( 'wikilookup_settings' );
 		$this->defaults = [
 			'trigger' => 'mouseenter',
+			'dark' => false,
 			'messages' => [
 				'link' => 'Read more',
 				'articleLink' => 'Go to the original article',
@@ -82,6 +83,7 @@ class Settings {
 			];
 		} else if ( $page === 'display' ) {
 			$newSettings = [
+				'dark' => isset( $results['dark'] ),
 				'messages' => [
 					'link' => sanitize_text_field( $results['messages']['link'] ),
 					'articleLink' => sanitize_text_field( $results['messages']['articleLink'] ),
