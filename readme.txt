@@ -89,5 +89,8 @@ Automatic updates should always work. However, as always, please ensure you back
 
 == Upgrade Notice ==
 
+= 1.1.3 =
+Bug fix: Prevent bootstrap styling from interfering with blog styles.
+
 = 1.1.2 =
 Added detailed information and instructions for the shortcodes, and an ability to toggle dark mode.
