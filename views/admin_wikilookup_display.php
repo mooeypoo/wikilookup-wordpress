@@ -6,7 +6,7 @@
 <h4><?php _e( 'Card Preview' ); ?></h4>
 <p class="description"><code>[wikicard title="mountain"]</code></p>
 <div class="wl-display-preview-card"></div>
-<h2>foo</h2>
+
 <?php $this->openForm(); ?>
 <h3><?php _e( 'General display settings' ); ?></h3>
 <table class="form-table">
