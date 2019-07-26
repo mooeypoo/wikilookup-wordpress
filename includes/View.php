@@ -9,8 +9,8 @@ class View {
 	protected $nonce;
 	protected $allowed;
 
-	public function __construct( $settings, $name, $title = 'Wikilookup settings' ) {
-		$legalPages = [ 'display', 'sources' ];
+	public function __construct( $settings, $name, $title = 'Wikilookup settings', $permissions = 'manage_options' ) {
+		$legalPages = [ 'main', 'display', 'sources' ];
 
 		$this->settings = $settings;
 		$this->name = $name;
@@ -18,11 +18,10 @@ class View {
 
 		$this->viewFile = in_array( $name, $legalPages ) ?
 			'admin_wikilookup_' . $name :
-			'admin_wikilookup_main';
+			'admin_wikilookup_general_info';
 		$this->action = 'wikilookup_settings_form_response';
 		$this->nonce = wp_create_nonce( 'wikilookup_settings_' . $this->name . '_form_nonce' );
-		$this->allowed = current_user_can( 'manage_options' );
-
+		$this->allowed = current_user_can( $permissions );
 	}
 
 	public function render() {

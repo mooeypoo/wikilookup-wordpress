@@ -179,15 +179,26 @@ class Settings {
 	public function createAdminMenus() {
 		// Top menu
 		add_menu_page(
-			'Wikilookup settings', // page_title
+			'Wikilookup information', // page_title
 			'Wikilookup', // menu_title
-			'manage_options', // capability
+			'edit_posts', // capability
 			'wikilookup-settings', // menu_slug
 			function () {
-				$this->outputSettingsPage( 'main' );
+				$this->outputSettingsPage( 'general_info' );
 			},
 			'dashicons-admin-comments', // icon_url
 			100 // position
+		);
+
+		add_submenu_page(
+			'wikilookup-settings', // Parent slug
+			'Wikilookup : General settings', // Page title
+			'General settings', // menu title
+			'manage_options', // capability
+			'wikilookup-settings-main', // menu_slug
+			function () {
+				$this->outputSettingsPage( 'main' );
+			}
 		);
 
 		add_submenu_page(
@@ -220,6 +231,7 @@ class Settings {
 		);
 	}
 	public function outputSettingsPage( $page ) {
+		$permissions = 'manage_options';
 		switch ( $page ) {
 			case 'display':
 				$title = 'Wikilookup settings : Display settings';
@@ -227,13 +239,17 @@ class Settings {
 			case 'sources':
 				$title = 'Wikilookup settings : External wikis';
 				break;
-			default:
 			case 'main':
-				$title = 'Wikilookup general settings';
+				$title = 'Wikilookup : General settings';
+				break;
+			default:
+			case 'general_info':
+				$title = 'Wikilookup : General information';
+				$permissions = 'edit_posts';
 				break;
 		}
 
-		$view = new View( $this, $page, $title );
+		$view = new View( $this, $page, $title, $permissions );
 		$view->render();
 	}
 
