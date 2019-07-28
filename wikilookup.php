@@ -54,6 +54,8 @@ add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), [ 'Wikilookup\Lo
 // Register shortcode
 add_shortcode( 'wikipopup', 'Wikilookup\Editor::shortcodeWikipopup' );
 add_shortcode( 'wikicard', 'Wikilookup\Editor::shortcodeWikicard' );
+// Register gutenberg block
+add_action( 'init', 'Wikilookup\Editor::registerGutenbergBlock' );
 
 // Add plugin file
 add_action( 'wp_enqueue_scripts', [ 'Wikilookup\Loader', 'loadAssets'  ] );
