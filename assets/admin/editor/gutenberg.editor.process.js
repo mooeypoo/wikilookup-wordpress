@@ -2,6 +2,9 @@
 	$( document ).ready( function () {
 		var settings;
 
+		// Only loaded for gutenberg editor, to provide information
+		// for the preview
+
 		wp_wikilookup_vars = wp_wikilookup_vars || {};
 		settings = $.extend( { popup: {}, card: {} }, wp_wikilookup_vars.settings );
 

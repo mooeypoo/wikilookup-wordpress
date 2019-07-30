@@ -68,66 +68,66 @@ class Editor {
 	}
 
 	public static function registerGutenbergBlock() {
-			// Skip block registration if Gutenberg is not enabled/merged.
-			if ( !function_exists( 'register_block_type' ) ) {
-				return;
-			}
-			$fileJS = 'assets/admin/gutenberg.block.wikicard.js';
-			wp_enqueue_script(
-				'wikilookup-wikicard-gutenberg-block',
-				WIKILOOKUP_DIR_URL . $fileJS,
-				array(
-					'wp-blocks',
-					'wp-i18n',
-					'wp-element',
-					'wp-components',
-					'jquery' // Wikilookup depends on jQuery; we need it for preview
-				),
-				filemtime( WIKILOOKUP_DIR_PATH . $fileJS )
-			);
+		// Skip block registration if Gutenberg is not enabled/merged.
+		if ( !function_exists( 'register_block_type' ) ) {
+			return;
+		}
+		$fileJS = 'assets/admin/editor/gutenberg.block.wikicard.js';
+		wp_enqueue_script(
+			'wikilookup-wikicard-gutenberg-block',
+			WIKILOOKUP_DIR_URL . $fileJS,
+			array(
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-components',
+				'jquery' // Wikilookup depends on jQuery; we need it for preview
+			),
+			filemtime( WIKILOOKUP_DIR_PATH . $fileJS )
+		);
 
-			// wikilookup
-			wp_enqueue_script(
-				'wikilookup-js-gutenberg',
-				WIKILOOKUP_DIR_URL . 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.js',
-				[ 'jquery' ],
-				false,
-				true // in footer
-			);
-			wp_enqueue_script(
-				'wikilookup-js-gutenberg-process',
-				WIKILOOKUP_DIR_URL . 'assets/admin/gutenberg.editor.process.js',
-				[ 'jquery' ],
-				false,
-				true // in footer
-			);
-			$jsVars = [
-				'settings' => get_option( 'wikilookup_settings' ),
-			];
-			wp_localize_script( 'wikilookup-wikicard-gutenberg-block', 'wp_wikilookup_vars', $jsVars );
+		// wikilookup
+		wp_enqueue_script(
+			'wikilookup-js-gutenberg',
+			WIKILOOKUP_DIR_URL . 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.js',
+			[ 'jquery' ],
+			false,
+			true // in footer
+		);
+		wp_enqueue_script(
+			'wikilookup-js-gutenberg-process',
+			WIKILOOKUP_DIR_URL . 'assets/admin/editor/gutenberg.editor.process.js',
+			[ 'jquery' ],
+			false,
+			true // in footer
+		);
+		$jsVars = [
+			'settings' => get_option( 'wikilookup_settings' ),
+		];
+		wp_localize_script( 'wikilookup-wikicard-gutenberg-block', 'wp_wikilookup_vars', $jsVars );
 
-			wp_enqueue_style(
-				'wikilookup-css-settings',
-				WIKILOOKUP_DIR_URL . 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.css'
-			);
+		wp_enqueue_style(
+			'wikilookup-css-settings',
+			WIKILOOKUP_DIR_URL . 'assets/jquery.wikilookup-' . WIKILOOKUP_DIST_VERSION . '.min.css'
+		);
 
-			register_block_type( 'wikilookup/card', array(
-				'editor_script' => 'wikilookup-wikicard-gutenberg-block',
-				'render_callback' => 'Wikilookup\Editor::gutenbergCardBlockHandler',
-				'attributes' => [
-					'title' => [
-						'type' => 'string',
-					],
-					'source' => [
-						'default' => '',
-						'type' => 'string',
-					],
-					'lang' => [
-						'default' => 'en',
-						'type' => 'string',
-					],
-				]
-			));
+		register_block_type( 'wikilookup/card', array(
+			'editor_script' => 'wikilookup-wikicard-gutenberg-block',
+			'render_callback' => 'Wikilookup\Editor::gutenbergCardBlockHandler',
+			'attributes' => [
+				'title' => [
+					'type' => 'string',
+				],
+				'source' => [
+					'default' => '',
+					'type' => 'string',
+				],
+				'lang' => [
+					'default' => 'en',
+					'type' => 'string',
+				],
+			]
+		));
 	}
 
 	public static function gutenbergCardBlockHandler( $atts ) {

@@ -113,7 +113,6 @@ class Loader {
 				WIKILOOKUP_DIR_URL . $src
 			);
 		}
-
 		$jsVars = [
 			// 'home'            => get_stylesheet_directory_uri(),
 			'settings' => get_option( 'wikilookup_settings' ),
