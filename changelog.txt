@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.1.4 =
+* BUGFIX: URI-encode Wikipedia SVG in data-uri, so it is displayed in all browsers.
+
 = 1.1.3 =
 * BUGFIX: Prevent bootstrap popover styling from interfering with blog styles.
 
