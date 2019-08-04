@@ -90,7 +90,7 @@ Automatic updates should always work. However, as always, please ensure you back
 == Upgrade Notice ==
 
 = 1.1.4 =
-Bug fix: Fix "Wikipedia" logo SVG to display in all browsers.
+Bug fix: Fix "Wikipedia" logo SVG to display in all browsers. Add Gutenberg block for wiki cards.
 
 = 1.1.3 =
 Bug fix: Prevent bootstrap styling from interfering with blog styles.
