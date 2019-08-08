@@ -89,6 +89,9 @@ Automatic updates should always work. However, as always, please ensure you back
 
 == Upgrade Notice ==
 
+= 1.1.5 =
+* Add mobile support for the popups
+
 = 1.1.4 =
 Bug fix: Fix "Wikipedia" logo SVG to display in all browsers. Add Gutenberg block for wiki cards.
 

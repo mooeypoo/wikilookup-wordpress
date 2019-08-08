@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.1.5 =
+* Add mobile support for the popups
+
 = 1.1.4 =
 * BUGFIX: URI-encode Wikipedia SVG in data-uri, so it is displayed in all browsers.
 * Add Gutenberg support for [wikicard]
